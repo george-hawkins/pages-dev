@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>In-System Programmer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style>
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+}
+.wide-button {
+    min-width: 80px;
+}
+.vbottom {
+    vertical-align: bottom;
+}
+.inline-group {
+    /* Add to make a .form-group more like a .btn */
+    display: inline-block;
+    margin-bottom: 0px;
+}
+</style>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+<div class="jumbotron">
+    <h1><nobr>In-System</nobr> Programmer<img src="http://electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
+    <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Signature</h3>
+    </div>
+    <div class="panel-body">
+        <p>Query the AVR MCU for the signature that distinguishes its type.</p>
+        <p>
+            <a href="#" class="btn btn-primary wide-button">Query</a>
+            <span id="mcu-desc">XXX</span>
+            <img src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
+        </p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sketch</h3>
+    </div>
+    <div class="panel-body">
+        <p>Program the AVR MCU with a HEX file.</p>
+        <input type="file" id="exampleInputFile">
+        <p></p>
+        <a href="#" class="btn btn-primary wide-button">Upload</a>
+        <img src="ajax-loader.gif">
+
+        <!--
+          For a visually more attractive file upload control see:
+          http://www.abeautifulsite.net/blog/2013/08/whipping-file-inputs-into-shape-with-bootstrap-3/
+        -->
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Fuses</h3>
+    </div>
+    <div class="panel-body">
+        <div class="alert alert-danger">
+            <b>Warning:</b> incorrectly settings the fuses may brick the MCU making
+             it unrecoverable with anything other than a high voltage programmer.
+        </div>
+        <p>Query or set the the fuses of the AVR MCU.</p>
+        <div>
+            <a href="#" class="btn btn-primary wide-button vbottom">Query</a>
+            <div class="form-group vbottom inline-group">
+              <label class="control-label" for="hfuse">High</label>
+              <input type="text" class="form-control" id="hfuse" size="4" placeholder="0x00">
+            </div>
+            <div class="form-group vbottom inline-group">
+              <label class="control-label" for="lfuse">Low</label>
+              <input type="text" class="form-control" id="lfuse" size="4" placeholder="0x00">
+            </div>
+            <div class="form-group vbottom inline-group">
+              <label class="control-label" for="efuse">Ext</label>
+              <input type="text" class="form-control" id="efuse" size="4" placeholder="0x00">
+            </div>
+            <a href="#" class="btn btn-danger wide-button vbottom">Set</a>
+            <img src="ajax-loader.gif">
+        </div>
+
+        <p></p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lock Bits</h3>
+    </div>
+    <div class="panel-body">
+        <p>Query or set the lock bits of the AVR MCU.</p>
+        <div class="form-inline">
+            <a href="#" class="btn btn-primary wide-button">Query</a>
+            <input type="text" class="form-control" id="lockbits" size="4" placeholder="0x00">
+            <a href="#" class="btn btn-danger wide-button">Set</a>
+            <img src="ajax-loader.gif">
+        </div>
+    </div>
+</div>
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!--
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    -->
+
+    <script>
+      (function ($) {
+        function updateHref(linkId, textId) {
+          var s = $(linkId).prop('href');
+          s = s.substring(0, s.lastIndexOf('/'));
+          s += '/' + $(textId).val();
+          $(linkId).prop('href', s);
+        }
+        function setupTextLink(linkId, textId) {
+          $(textId).change(function() {
+            updateHref(linkId, textId);
+          });
+          $(textId).keydown(function (e){
+            if(e.keyCode == 13){
+              // If you changed text and press enter, this handler
+              // will be called before the change handler, so...
+              updateHref(linkId, textId);
+        
+              window.location.href = $(linkId).prop('href');
+              return false;
+            }
+          });
+        }
+//        setupTextLink('#programmerIdLink', '#programmerIdText');
+//        setupTextLink('#partIdLink', '#partIdText');
+//        setupTextLink('#signatureIdLink', '#signatureIdText');
+      })(jQuery);
+    </script>
+
+  </body>
+</html>
