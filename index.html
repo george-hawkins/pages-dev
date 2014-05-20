@@ -139,11 +139,6 @@ body {
     <script>
       (function ($) {
 
-        function sleep(ms){
-            var now = new Date().getTime();
-            while(new Date().getTime() < now + ms){ /* NOP. */ } 
-        }
-
         $('#signature-query').click(function (e) {
             e.preventDefault();
             $('#signature-loading').show();
@@ -157,7 +152,6 @@ body {
                     $('#signature-result').text(s);
                 }
             });
-	    sleep(2000);
             $('#signature-loading').hide();
         });
 
