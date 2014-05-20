@@ -54,7 +54,7 @@ body {
         <p>Query the AVR MCU for the signature that distinguishes its type.</p>
         <p>
             <a id="signature-query" href="#" class="btn btn-primary wide-button">Query</a>
-            <span id="mcu-desc">XXX</span>
+            <span id="signature-result">XXX</span>
             <img id="signature-loading" class="hidden" src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
         </p>
     </div>
@@ -150,8 +150,10 @@ body {
                     console.log(result);
                     console.log(result.signature[1]);
                     console.log(result.description);
-                    console.log(sprintf("[ 0x%02x, 0x%02x 0x%02x ] %s",
-                        result.signature[0], result.signature[1], result.signature[2], result.description));
+		    var s = sprintf("[ 0x%02x, 0x%02x 0x%02x ] %s",
+                        result.signature[0], result.signature[1], result.signature[2], result.description);
+		    console.log(s);
+                    $('#signature-result').text(s);
                 },
             });
             $('#signature-loading').hide();
