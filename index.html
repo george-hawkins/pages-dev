@@ -139,6 +139,11 @@ body {
     <script>
       (function ($) {
 
+        function sleep(ms){
+            var now = new Date().getTime();
+            while(new Date().getTime() < now + ms){ /* NOP. */ } 
+        }
+
         $('#signature-query').click(function (e) {
             e.preventDefault();
             $('#signature-loading').show();
@@ -147,15 +152,12 @@ body {
                 url: 'action/getsignature',
                 dataType: 'json',
                 success: function(result) {
-                    console.log(result);
-                    console.log(result.signature[1]);
-                    console.log(result.description);
-		    var s = sprintf("[ 0x%02x, 0x%02x 0x%02x ] %s",
+		    var s = sprintf("[ 0x%02x, 0x%02x, 0x%02x ] %s",
                         result.signature[0], result.signature[1], result.signature[2], result.description);
-		    console.log(s);
                     $('#signature-result').text(s);
-                },
+                }
             });
+	    sleep(2000);
             $('#signature-loading').hide();
         });
 
