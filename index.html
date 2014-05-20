@@ -138,7 +138,8 @@ body {
 
         $('#signature-query').click(function (e) {
             e.preventDefault();
-            $('#signature-loading').show();
+	    // Note: Bootstrap defines class hidden which can't be used with jQuery's show() and hide().
+            $('#signature-loading').removeClass('hidden');
             $.ajax({
                 async: false,
                 url: 'action/getsignature',
@@ -149,6 +150,7 @@ body {
                     $('#signature-result').text(s);
                 }
             });
+            $('#signature-loading').addClass('hidden');
         });
 
         function updateHref(linkId, textId) {
