@@ -31,6 +31,9 @@ body {
     display: inline-block;
     margin-bottom: 0px;
 }
+.hidden {
+    display: none;
+}
 </style>
   </head>
 
@@ -50,9 +53,9 @@ body {
     <div class="panel-body">
         <p>Query the AVR MCU for the signature that distinguishes its type.</p>
         <p>
-            <a href="#" class="btn btn-primary wide-button">Query</a>
+            <a id="signature-query" href="#" class="btn btn-primary wide-button">Query</a>
             <span id="mcu-desc">XXX</span>
-            <img src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
+            <img id="signature-loading" class="hidden" src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
         </p>
     </div>
 </div>
@@ -134,6 +137,22 @@ body {
 
     <script>
       (function ($) {
+
+        $('#signature-query').click(function (e) {
+            e.preventDefault();
+	    $('#signature-loading').show();
+            $.ajax({
+                async: false,
+                url: 'getsignature',
+                dataType: 'json',
+                success: function(result) {
+                    console.log(result);
+                    console.log(JSON.stringify(result));
+                },
+            });
+	    $('#signature-loading').hide();
+        });
+
         function updateHref(linkId, textId) {
           var s = $(linkId).prop('href');
           s = s.substring(0, s.lastIndexOf('/'));
