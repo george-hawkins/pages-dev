@@ -136,21 +136,22 @@ body {
     <script>
       (function ($) {
 
+        function getSignature(result) {
+            var s = sprintf("[ 0x%02x, 0x%02x, 0x%02x ] %s",
+                result.signature[0], result.signature[1], result.signature[2], result.description);
+            $('#signature-result').text(s);
+            $('#signature-loading').addClass('hidden');
+        }
+
         $('#signature-query').click(function (e) {
             e.preventDefault();
-	    // Note: Bootstrap defines class hidden which can't be used with jQuery's show() and hide().
+            // Note: Bootstrap defines class hidden which can't be used with jQuery's show() and hide().
             $('#signature-loading').removeClass('hidden');
             $.ajax({
-                async: false,
-                url: 'action/getsignature',
+                url: 'action/getSignature',
                 dataType: 'json',
-                success: function(result) {
-		    var s = sprintf("[ 0x%02x, 0x%02x, 0x%02x ] %s",
-                        result.signature[0], result.signature[1], result.signature[2], result.description);
-                    $('#signature-result').text(s);
-                }
+                success: getSignature
             });
-//            $('#signature-loading').addClass('hidden');
         });
 
         function updateHref(linkId, textId) {
