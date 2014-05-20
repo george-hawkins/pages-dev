@@ -134,13 +134,14 @@ body {
     <!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     -->
+    <script src="sprintf.min.js"></script>
 
     <script>
       (function ($) {
 
         $('#signature-query').click(function (e) {
             e.preventDefault();
-	    $('#signature-loading').show();
+            $('#signature-loading').show();
             $.ajax({
                 async: false,
                 url: 'action/getsignature',
@@ -149,9 +150,11 @@ body {
                     console.log(result);
                     console.log(result.signature[1]);
                     console.log(result.description);
+                    console.log(sprintf("[ 0x%02x, 0x%02x 0x%02x ] %s",
+                        result.signature[0], result.signature[1], result.signature[2], result.description));
                 },
             });
-	    $('#signature-loading').hide();
+            $('#signature-loading').hide();
         });
 
         function updateHref(linkId, textId) {
