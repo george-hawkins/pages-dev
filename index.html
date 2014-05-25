@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.2</small></p>
+    <p><small>Rev. 0.3</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -174,14 +174,13 @@ body {
         function uploadHex(result) {
             $('#upload-hex-loading').addClass('hidden');
 
-            alert('Hex - ' + (result.success ? 'Info' : 'Error') + ': ' + result.message);
+            alert('Hex - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         }
 
         $('#upload-hex-submit').click(function (e) {
             e.preventDefault();
             $('#upload-hex-loading').removeClass('hidden');
             $("#upload-hex-form").ajaxSubmit({
-                url: 'action/uploadHex',
                 dataType: 'json',
                 success: uploadHex
             });
@@ -214,7 +213,7 @@ body {
             $('#efuse').val(result.efuse);
         }
 
-        $('#signature-query').click(function (e) {
+        $('#fuses-query').click(function (e) {
             e.preventDefault();
             $('#fuses-loading').removeClass('hidden');
             $.ajax({
