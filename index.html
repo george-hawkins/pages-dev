@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 1</small></p>
+    <p><small>Rev. 0.1</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -58,7 +58,7 @@ body {
     </div>
 </div>
 
-<form id="upload-hex-form" action="action/uploadHex" method="post">
+<form id="upload-hex-form" action="action/uploadHex" method="POST">
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Sketch</h3>
@@ -78,6 +78,7 @@ body {
 </div>
 </form>
 
+<form id="fuses-form" action="action/setFuses" method="GET">
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Fuses</h3>
@@ -89,7 +90,7 @@ body {
         </div>
         <p>Query or set the the fuses of the AVR MCU.</p>
         <div>
-            <a href="#" class="btn btn-primary wide-button vbottom">Query</a>
+            <a id="fuses-query" href="#" class="btn btn-primary wide-button vbottom">Query</a>
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="hfuse">High</label>
               <input type="text" class="form-control" id="hfuse" size="4" placeholder="0x00">
@@ -102,13 +103,14 @@ body {
               <label class="control-label" for="efuse">Ext</label>
               <input type="text" class="form-control" id="efuse" size="4" placeholder="0x00">
             </div>
-            <a href="#" class="btn btn-danger wide-button vbottom">Set</a>
-            <img src="ajax-loader.gif">
+            <a id="fuses-set" href="#" class="btn btn-danger wide-button vbottom">Set</a>
+            <img id="fuses-loading" class="hidden" src="ajax-loader.gif">
         </div>
 
         <p></p>
     </div>
 </div>
+</form>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -143,10 +145,13 @@ body {
         // -------------------------------------------------------------
 
         function getSignature(result) {
+            $('#signature-loading').addClass('hidden');
+
+            // TODO: check success.
+
             var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
                 result.description, result.signature[0], result.signature[1], result.signature[2]);
             $('#signature-result').text(s);
-            $('#signature-loading').addClass('hidden');
         }
 
         $('#signature-query').click(function (e) {
@@ -164,8 +169,9 @@ body {
         // -------------------------------------------------------------
 
         function uploadHex(result) {
-            alert((result.success ? 'Info' : 'Error') + ': ' + result.message);
             $('#upload-hex-loading').addClass('hidden');
+
+            alert('Hex - ' + (result.success ? 'Info' : 'Error') + ': ' + result.message);
         }
 
         $('#upload-hex-submit').click(function (e) {
@@ -175,6 +181,43 @@ body {
                 url: 'action/uploadHex',
                 dataType: 'json',
                 success: uploadHex
+            });
+        });
+
+        // -------------------------------------------------------------
+
+        function setFuses(result) {
+            $('#fuses-loading').addClass('hidden');
+
+            alert('Fuses - ' + (result.success ? 'Info' : 'Error') + ': ' + result.message);
+        }
+
+        $('#fuses-set').click(function (e) {
+            e.preventDefault();
+            $('#fuses-loading').removeClass('hidden');
+            $("#fuses-form").ajaxSubmit({
+                dataType: 'json',
+                success: setFuses
+            });
+        });
+
+        function getFuses(result) {
+            $('#fuses-loading').addClass('hidden');
+
+            // TODO: check success.
+
+            $('#hfuse').val(result.hfuse);
+            $('#lfuse').val(result.lfuse);
+            $('#efuse').val(result.efuse);
+        }
+
+        $('#signature-query').click(function (e) {
+            e.preventDefault();
+            $('#fuses-loading').removeClass('hidden');
+            $.ajax({
+                url: 'action/getFuses',
+                dataType: 'json',
+                success: getFuses
             });
         });
 
