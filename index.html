@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.4</small></p>
+    <p><small>Rev. 0.5</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -115,6 +115,7 @@ body {
 </div>
 </form>
 
+<form id="lock-bits-form" action="action/setLockBits" method="GET">
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Lock Bits</h3>
@@ -122,13 +123,16 @@ body {
     <div class="panel-body">
         <p>Query or set the lock bits of the AVR MCU.</p>
         <div class="form-inline">
-            <a href="#" class="btn btn-primary wide-button">Query</a>
-            <input type="text" class="form-control" id="lockbits" size="4" placeholder="0x00">
-            <a href="#" class="btn btn-danger wide-button">Set</a>
-            <img src="ajax-loader.gif">
+            <a id ="lock-bits-query" href="#" class="btn btn-primary wide-button">Query</a>
+
+            <input type="text" class="form-control" id="lock-bits" size="4" placeholder="0x00">
+
+            <a id ="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
+            <img id="lock-bits-loading" class="hidden" src="ajax-loader.gif">
         </div>
     </div>
 </div>
+</form>
 
     </div><!-- /.container -->
 
@@ -225,6 +229,27 @@ body {
                 dataType: 'json',
                 success: getFuses
             });
+        });
+
+        // -------------------------------------------------------------
+
+        function wireUp(buttonId, loadingId, _url, _success) {
+            $(buttonId).click(function (e) {
+                e.preventDefault();
+                $(loadingId).removeClass('hidden');
+                $.ajax({
+                    url: _url,
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#fuses-loading').addClass('hidden');
+                        _success(result);
+                    }
+                });
+            });
+        }
+
+        wireUp('#lock-bits-query', '#lock-bits-loading', 'action/getLockBits', function (result) {
+            $('#lock-bits').val(hex(result.lockBits));
         });
 
         // -------------------------------------------------------------
