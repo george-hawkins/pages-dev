@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.8</small></p>
+    <p><small>Rev. 0.9</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -149,56 +149,21 @@ body {
     <script>
       (function ($) {
 
-        // -------------------------------------------------------------
-
-        function getSignature(result) {
-            $('#signature-loading').addClass('hidden');
-
+        wireUpButton('#signature-query', '#signature-loading', 'action/getSignature', function (result) {
             // TODO: check success.
 
             var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
                 result.description, result.signature[0], result.signature[1], result.signature[2]);
             $('#signature-result').text(s);
-        }
-
-        $('#signature-query').click(function (e) {
-            e.preventDefault();
-            // Note: Bootstrap defines class hidden which can't be used with jQuery's show() and hide().
-            $('#signature-loading').removeClass('hidden');
-            // If you do sync ajax then the loading image will never show.
-            $.ajax({
-                url: 'action/getSignature',
-                dataType: 'json',
-                success: getSignature
-            });
         });
 
-        // -------------------------------------------------------------
-
-        function uploadHex(result) {
-            $('#upload-hex-loading').addClass('hidden');
-
-            alert('Hex - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
-        }
-
-        $('#upload-hex-submit').click(function (e) {
-            e.preventDefault();
-            $('#upload-hex-loading').removeClass('hidden');
-            $("#upload-hex-form").ajaxSubmit({
-                dataType: 'json',
-                success: uploadHex
-            });
+        wireUpForm('#upload-hex-set', '#upload-hex-loading', '#upload-hex-form', function (result) {
+            alert(result.name + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         });
-
-        // -------------------------------------------------------------
 
         wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', function (result) {
-            alert('Fuses - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
+            alert(result.name + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         });
-
-        function hex(i) {
-            return sprintf("0x%02x", i);
-        }
 
         wireUpButton('#fuses-query', '#fuses-loading', 'action/getFuses', function (result) {
             // TODO: check success.
@@ -208,16 +173,21 @@ body {
             $('#efuse').val(hex(result.efuse));
         });
 
-
-        // -------------------------------------------------------------
-
         wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', function (result) {
-            alert('Fuses - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
+            alert(result.name + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         });
 
         wireUpButton('#lock-bits-query', '#lock-bits-loading', 'action/getLockBits', function (result) {
+            // TODO: check success.
+
             $('#lock-bits').val(hex(result.lockBits));
         });
+
+        // -------------------------------------------------------------
+
+        function hex(i) {
+            return sprintf("0x%02x", i);
+        }
 
         function wireUpForm(buttonId, loadingId, formId, _success) {
             $(buttonId).click(function (e) {
@@ -248,32 +218,6 @@ body {
             });
         }
 
-        // -------------------------------------------------------------
-
-        function updateHref(linkId, textId) {
-          var s = $(linkId).prop('href');
-          s = s.substring(0, s.lastIndexOf('/'));
-          s += '/' + $(textId).val();
-          $(linkId).prop('href', s);
-        }
-        function setupTextLink(linkId, textId) {
-          $(textId).change(function() {
-            updateHref(linkId, textId);
-          });
-          $(textId).keydown(function (e){
-            if(e.keyCode == 13){
-              // If you changed text and press enter, this handler
-              // will be called before the change handler, so...
-              updateHref(linkId, textId);
-        
-              window.location.href = $(linkId).prop('href');
-              return false;
-            }
-          });
-        }
-//        setupTextLink('#programmerIdLink', '#programmerIdText');
-//        setupTextLink('#partIdLink', '#partIdText');
-//        setupTextLink('#signatureIdLink', '#signatureIdText');
       })(jQuery);
     </script>
 
