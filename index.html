@@ -65,7 +65,7 @@ body {
     </div>
     <div class="panel-body">
         <p>Program the AVR MCU with a HEX <!-- Intel capitalize HEX like this. --> file.</p>
-        <input type="file" id="exampleInputFile">
+        <input id="hexFile" type="file">
         <p></p>
         <a id="upload-hex-submit" href="#" class="btn btn-primary wide-button">Upload</a>
         <img id="upload-hex-loading" class="hidden" src="ajax-loader.gif">
@@ -95,15 +95,15 @@ body {
             <!-- low, high, extended is the order used by http://www.engbedded.com/fusecalc -->
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="lfuse">Low</label>
-              <input type="text" class="form-control" id="lfuse" size="4" placeholder="0x00">
+              <input id="lfuse" type="text" class="form-control" size="4" placeholder="0x00">
             </div>
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="hfuse">High</label>
-              <input type="text" class="form-control" id="hfuse" size="4" placeholder="0x00">
+              <input id="hfuse" type="text" class="form-control" size="4" placeholder="0x00">
             </div>
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="efuse">Ext</label>
-              <input type="text" class="form-control" id="efuse" size="4" placeholder="0x00">
+              <input id="efuse" type="text" class="form-control" size="4" placeholder="0x00">
             </div>
 
             <a id="fuses-set" href="#" class="btn btn-danger wide-button vbottom">Set</a>
@@ -125,7 +125,7 @@ body {
         <div class="form-inline">
             <a id ="lock-bits-query" href="#" class="btn btn-primary wide-button">Query</a>
 
-            <input type="text" class="form-control" id="lock-bits" size="4" placeholder="0x00">
+            <input id="lock-bits" type="text" class="form-control" size="4" placeholder="0x00">
 
             <a id ="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
             <img id="lock-bits-loading" class="hidden" src="ajax-loader.gif">
@@ -143,11 +143,11 @@ body {
     <!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     -->
-    <script src="//malsup.github.io/jquery.form.js"></script>
+    <script src="//malsup.github.io/jquery.form.js"></script> <!-- http://stackoverflow.com/a/4545089/245602 -->
     <script src="sprintf.min.js"></script>
 
     <script>
-      (function ($) {
+    (function ($) {
 
         wireUpButton('#signature-query', '#signature-loading', 'action/getSignature', function (result) {
             // TODO: check success.
@@ -218,7 +218,7 @@ body {
             });
         }
 
-      })(jQuery);
+    })(jQuery);
     </script>
 
   </body>
