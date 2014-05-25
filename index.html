@@ -164,8 +164,8 @@ body {
         // -------------------------------------------------------------
 
         function uploadHex(result) {
-            alert('Alles gut :)');
-            $('#hex-upload-loading').addClass('hidden');
+            alert((result.success ? 'Info' : 'Error') + ': ' + result.message);
+            $('#upload-hex-loading').addClass('hidden');
         }
 
         $('#upload-hex-submit').click(function (e) {
