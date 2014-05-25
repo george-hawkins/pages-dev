@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.1</small></p>
+    <p><small>Rev. 0.2</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -91,18 +91,21 @@ body {
         <p>Query or set the the fuses of the AVR MCU.</p>
         <div>
             <a id="fuses-query" href="#" class="btn btn-primary wide-button vbottom">Query</a>
-            <div class="form-group vbottom inline-group">
-              <label class="control-label" for="hfuse">High</label>
-              <input type="text" class="form-control" id="hfuse" size="4" placeholder="0x00">
-            </div>
+
+            <!-- low, high, extended is the order used by http://www.engbedded.com/fusecalc -->
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="lfuse">Low</label>
               <input type="text" class="form-control" id="lfuse" size="4" placeholder="0x00">
             </div>
             <div class="form-group vbottom inline-group">
+              <label class="control-label" for="hfuse">High</label>
+              <input type="text" class="form-control" id="hfuse" size="4" placeholder="0x00">
+            </div>
+            <div class="form-group vbottom inline-group">
               <label class="control-label" for="efuse">Ext</label>
               <input type="text" class="form-control" id="efuse" size="4" placeholder="0x00">
             </div>
+
             <a id="fuses-set" href="#" class="btn btn-danger wide-button vbottom">Set</a>
             <img id="fuses-loading" class="hidden" src="ajax-loader.gif">
         </div>
@@ -189,7 +192,7 @@ body {
         function setFuses(result) {
             $('#fuses-loading').addClass('hidden');
 
-            alert('Fuses - ' + (result.success ? 'Info' : 'Error') + ': ' + result.message);
+            alert('Fuses - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         }
 
         $('#fuses-set').click(function (e) {
@@ -206,8 +209,8 @@ body {
 
             // TODO: check success.
 
-            $('#hfuse').val(result.hfuse);
             $('#lfuse').val(result.lfuse);
+            $('#hfuse').val(result.hfuse);
             $('#efuse').val(result.efuse);
         }
 
