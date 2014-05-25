@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.3</small></p>
+    <p><small>Rev. 0.4</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -203,14 +203,18 @@ body {
             });
         });
 
+        function hex(i) {
+            return sprintf("0x%02x", i);
+        }
+
         function getFuses(result) {
             $('#fuses-loading').addClass('hidden');
 
             // TODO: check success.
 
-            $('#lfuse').val(result.lfuse);
-            $('#hfuse').val(result.hfuse);
-            $('#efuse').val(result.efuse);
+            $('#lfuse').val(hex(result.lfuse));
+            $('#hfuse').val(hex(result.hfuse));
+            $('#efuse').val(hex(result.efuse));
         }
 
         $('#fuses-query').click(function (e) {
