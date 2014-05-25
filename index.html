@@ -41,6 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
+    <p><small>Rev. 1</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -57,16 +58,17 @@ body {
     </div>
 </div>
 
+<form id="upload-hex-form" action="action/uploadHex" method="post">
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Sketch</h3>
     </div>
     <div class="panel-body">
-        <p>Program the AVR MCU with a HEX file.</p>
+        <p>Program the AVR MCU with a HEX <!-- Intel capitalize HEX like this. --> file.</p>
         <input type="file" id="exampleInputFile">
         <p></p>
-        <a href="#" class="btn btn-primary wide-button">Upload</a>
-        <img src="ajax-loader.gif">
+        <a id="upload-hex-submit" href="#" class="btn btn-primary wide-button">Upload</a>
+        <img id="upload-hex-loading" class="hidden" src="ajax-loader.gif">
 
         <!--
           For a visually more attractive file upload control see:
@@ -74,6 +76,7 @@ body {
         -->
     </div>
 </div>
+</form>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -131,14 +134,17 @@ body {
     <!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     -->
+    <script src="//malsup.github.io/jquery.form.js"></script>
     <script src="sprintf.min.js"></script>
 
     <script>
       (function ($) {
 
+        // -------------------------------------------------------------
+
         function getSignature(result) {
-            var s = sprintf("[ 0x%02x, 0x%02x, 0x%02x ] %s",
-                result.signature[0], result.signature[1], result.signature[2], result.description);
+            var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
+                result.description, result.signature[0], result.signature[1], result.signature[2]);
             $('#signature-result').text(s);
             $('#signature-loading').addClass('hidden');
         }
@@ -147,12 +153,32 @@ body {
             e.preventDefault();
             // Note: Bootstrap defines class hidden which can't be used with jQuery's show() and hide().
             $('#signature-loading').removeClass('hidden');
+            // If you do sync ajax then the loading image will never show.
             $.ajax({
                 url: 'action/getSignature',
                 dataType: 'json',
                 success: getSignature
             });
         });
+
+        // -------------------------------------------------------------
+
+        function uploadHex(result) {
+            alert('Alles gut :)');
+            $('#hex-upload-loading').addClass('hidden');
+        }
+
+        $('#upload-hex-submit').click(function (e) {
+            e.preventDefault();
+            $('#upload-hex-loading').removeClass('hidden');
+            $("#upload-hex-form").ajaxSubmit({
+                url: 'action/uploadHex',
+                dataType: 'json',
+                success: uploadHex
+            });
+        });
+
+        // -------------------------------------------------------------
 
         function updateHref(linkId, textId) {
           var s = $(linkId).prop('href');
