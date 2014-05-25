@@ -41,7 +41,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.6</small></p>
+    <p><small>Rev. 0.7</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -192,26 +192,15 @@ body {
 
         // -------------------------------------------------------------
 
-        function setFuses(result) {
-            $('#fuses-loading').addClass('hidden');
-
+        wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', function (result) {
             alert('Fuses - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
-        }
-
-        $('#fuses-set').click(function (e) {
-            e.preventDefault();
-            $('#fuses-loading').removeClass('hidden');
-            $("#fuses-form").ajaxSubmit({
-                dataType: 'json',
-                success: setFuses
-            });
         });
 
         function hex(i) {
             return sprintf("0x%02x", i);
         }
 
-        wireUp('#fuses-query', '#fuses-loading', 'action/getFuses', function (result) {
+        wireUpButton('#fuses-query', '#fuses-loading', 'action/getFuses', function (result) {
             // TODO: check success.
 
             $('#lfuse').val(hex(result.lfuse));
@@ -222,7 +211,29 @@ body {
 
         // -------------------------------------------------------------
 
-        function wireUp(buttonId, loadingId, _url, _success) {
+        wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', function (result) {
+            alert('Fuses - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
+        });
+
+        wireUpButton('#lock-bits-query', '#lock-bits-loading', 'action/getLockBits', function (result) {
+            $('#lock-bits').val(hex(result.lockBits));
+        });
+
+        function wireUpForm(buttonId, loadingId, formId, _url, _success) {
+            $(buttonId).click(function (e) {
+                e.preventDefault();
+                $(loadingId).removeClass('hidden');
+                $(formId).ajaxSubmit({
+                    dataType: 'json',
+                    success: function (result) {
+                        $(loadingId).addClass('hidden');
+                        _success(result);
+                    }
+                });
+            });
+        }
+
+        function wireUpButton(buttonId, loadingId, _url, _success) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
                 $(loadingId).removeClass('hidden');
@@ -236,10 +247,6 @@ body {
                 });
             });
         }
-
-        wireUp('#lock-bits-query', '#lock-bits-loading', 'action/getLockBits', function (result) {
-            $('#lock-bits').val(hex(result.lockBits));
-        });
 
         // -------------------------------------------------------------
 
