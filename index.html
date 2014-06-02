@@ -170,41 +170,54 @@ body {
         /* global sprintf */
 
         wireUpButton('#signature-query', '#signature-loading', '#signature-success', 'action/getSignature', function (result) {
-            // TODO: check success.
-
-            var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
-                result.description, result.signature[0], result.signature[1], result.signature[2]);
-            $('#signature-result').text(s);
+            if (result.success) {
+                var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
+                    result.description, result.signature[0], result.signature[1], result.signature[2]);
+                $('#signature-result').text(s);
+            } else {
+                $('#signature-result').text('');
+                alert(result.name + ' - ' + 'Error: ' + result.message);
+            }
         });
 
         wireUpForm('#upload-hex-submit', '#upload-hex-loading', '#upload-hex-form', '#upload-hex-success', function (result) {
             if (!result.success) {
-                alert(result.name + ' - ' + ('Error: ' + result.message));
+                alert(result.name + ' - ' + 'Error: ' + result.message);
             }
         });
 
         wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', '#fuses-set-success', function (result) {
             if (!result.success) {
-                alert(result.name + ' - ' + ('Error: ' + result.message));
+                alert(result.name + ' - ' + 'Error: ' + result.message);
             }
         });
 
         wireUpButton('#fuses-query', '#fuses-loading', '#fuses-set-success', 'action/getFuses', function (result) {
-            // TODO: check success.
-
-            $('#lfuse').val(hex(result.lfuse));
-            $('#hfuse').val(hex(result.hfuse));
-            $('#efuse').val(hex(result.efuse));
+            if (result.success) {
+                $('#lfuse').val(hex(result.lfuse));
+                $('#hfuse').val(hex(result.hfuse));
+                $('#efuse').val(hex(result.efuse));
+            } else {
+                $('#lfuse').val('');
+                $('#hfuse').val('');
+                $('#efuse').val('');
+                alert(result.name + ' - ' + 'Error: ' + result.message);
+            }
         });
 
         wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', '#lock-bits-set-success', function (result) {
-            alert(result.name + ' - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
+            if (!result.success) {
+                alert(result.name + ' - ' + 'Error: ' + result.message);
+            }
         });
 
         wireUpButton('#lock-bits-query', '#lock-bits-loading', '#lock-bits-query-success', 'action/getLockBits', function (result) {
-            // TODO: check success.
-
-            $('#lock-bits').val(hex(result.lockBits));
+            if (result.success) {
+                $('#lock-bits').val(hex(result.lockBits));
+            } else {
+                $('#lock-bits').val(''));
+                alert(result.name + ' - ' + 'Error: ' + result.message);
+            }
         });
 
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
