@@ -62,7 +62,7 @@ body {
         <p>
             <a id="signature-query" href="#" class="btn btn-primary wide-button">Query</a>
             <span id="signature-result"><!-- signature result --></span>
-            <img id="signature-loading" class="hidden" src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
+            <img id="signature-loading" class="jquery-hidden" src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
             <span id="signature-success" class="jquery-hidden label label-success">Query succeeded</span>
         </p>
     </div>
@@ -78,7 +78,7 @@ body {
         <input id="hexFile" type="file">
         <p></p>
         <a id="upload-hex-submit" href="#" class="btn btn-primary wide-button">Upload</a>
-        <img id="upload-hex-loading" class="hidden" src="ajax-loader.gif">
+        <img id="upload-hex-loading" class="jquery-hidden" src="ajax-loader.gif">
         <span id="upload-hex-success" class="jquery-hidden label label-success">Programming succeeded</span>
 
         <!--
@@ -118,7 +118,7 @@ body {
             </div>
 
             <a id="fuses-set" href="#" class="btn btn-danger wide-button vbottom">Set</a>
-            <img id="fuses-loading" class="hidden" src="ajax-loader.gif">
+            <img id="fuses-loading" class="jquery-hidden" src="ajax-loader.gif">
             <span id="fuses-query-success" class="jquery-hidden label label-success raise-8px">Query succeeded</span>
             <span id="fuses-set-success" class="jquery-hidden label label-success raise-8px">Query succeeded</span>
         </div>
@@ -141,7 +141,7 @@ body {
             <input id="lock-bits" type="text" class="form-control" size="4" placeholder="0x00">
 
             <a id ="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
-            <img id="lock-bits-loading" class="hidden" src="ajax-loader.gif">
+            <img id="lock-bits-loading" class="jquery-hidden" src="ajax-loader.gif">
             <span id="lock-bits-query-success" class="jquery-hidden label label-success">Query succeeded</span>
             <span id="lock-bits-set-success" class="jquery-hidden label label-success">Set succeeded</span>
         </div>
@@ -158,7 +158,10 @@ body {
     <!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     -->
-    <script src="//malsup.github.io/jquery.form.js"></script> <!-- http://stackoverflow.com/a/4545089/245602 -->
+
+    <!-- http://stackoverflow.com/a/4545089/245602 http://stackoverflow.com/a/1960245/245602 -->
+    <script src="//malsup.github.io/jquery.form.js"></script>
+
     <script src="sprintf.min.js"></script>
 
     <script>
@@ -175,11 +178,15 @@ body {
         });
 
         wireUpForm('#upload-hex-submit', '#upload-hex-loading', '#upload-hex-form', '#upload-hex-success', function (result) {
-            alert(result.name + ' - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
+            if (!result.success) {
+                alert(result.name + ' - ' + ('Error: ' + result.message));
+            }
         });
 
         wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', '#fuses-set-success', function (result) {
-            alert(result.name + ' - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
+            if (!result.success) {
+                alert(result.name + ' - ' + ('Error: ' + result.message));
+            }
         });
 
         wireUpButton('#fuses-query', '#fuses-loading', '#fuses-set-success', 'action/getFuses', function (result) {
@@ -200,6 +207,13 @@ body {
             $('#lock-bits').val(hex(result.lockBits));
         });
 
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        // Add Bootstrap model (see Bootstrap Javascript page) for errors.
+        // Add error checking for no upload file, missing or non-hex fuse values and lockbits.
+        // As the imp has to parse the fuses etc. it might as well also handle the error checking
+        // for missing or misformatted values rather than trying to do it in Javascript.
+        // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+
         // -------------------------------------------------------------
 
         function hex(i) {
@@ -209,11 +223,11 @@ body {
         function wireUpForm(buttonId, loadingId, formId, successId, _success) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
-                $(loadingId).removeClass('hidden');
+                $(loadingId).show();
                 $(formId).ajaxSubmit({
                     dataType: 'json',
                     success: function (result) {
-                        $(loadingId).addClass('hidden');
+                        $(loadingId).hide();
                         _success(result);
                         $(successId).show();
                         $(successId).fadeOut(4000);
@@ -225,12 +239,12 @@ body {
         function wireUpButton(buttonId, loadingId, successId, _url, _success) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
-                $(loadingId).removeClass('hidden');
+                $(loadingId).show();
                 $.ajax({
                     url: _url,
                     dataType: 'json',
                     success: function (result) {
-                        $(loadingId).addClass('hidden');
+                        $(loadingId).hide();
                         _success(result);
                         $(successId).show();
                         $(successId).fadeOut(4000);
