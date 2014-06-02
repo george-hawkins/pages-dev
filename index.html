@@ -192,7 +192,7 @@ body {
             }
         });
 
-        wireUpButton('#fuses-query', '#fuses-loading', '#fuses-set-success', 'action/getFuses', function (result) {
+        wireUpButton('#fuses-query', '#fuses-loading', '#fuses-query-success', 'action/getFuses', function (result) {
             if (result.success) {
                 $('#lfuse').val(hex(result.lfuse));
                 $('#hfuse').val(hex(result.hfuse));
