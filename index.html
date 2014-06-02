@@ -215,7 +215,7 @@ body {
             if (result.success) {
                 $('#lock-bits').val(hex(result.lockBits));
             } else {
-                $('#lock-bits').val(''));
+                $('#lock-bits').val('');
                 alert(result.name + ' - ' + 'Error: ' + result.message);
             }
         });
