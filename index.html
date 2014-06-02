@@ -29,7 +29,16 @@ body {
 .inline-group {
     /* Add to make a .form-group more like a .btn */
     display: inline-block;
-    margin-bottom: 0px;
+    margin-bottom: 0;
+}
+.raise-8px {
+    /* Vertically center label relative to button even when vertical-align is bottom. */
+    position: relative;
+    top: -8px;
+}
+.jquery-hidden {
+    /* Bootstrap defines a .hidden which is different to JQuery's idea of hidden. */
+    display: none;
 }
 </style>
   </head>
@@ -54,6 +63,7 @@ body {
             <a id="signature-query" href="#" class="btn btn-primary wide-button">Query</a>
             <span id="signature-result"><!-- signature result --></span>
             <img id="signature-loading" class="hidden" src="ajax-loader.gif"> <!-- See http://stackoverflow.com/a/15013828/245602 -->
+            <span id="signature-success" class="jquery-hidden label label-success">Query succeeded</span>
         </p>
     </div>
 </div>
@@ -69,6 +79,7 @@ body {
         <p></p>
         <a id="upload-hex-submit" href="#" class="btn btn-primary wide-button">Upload</a>
         <img id="upload-hex-loading" class="hidden" src="ajax-loader.gif">
+        <span id="upload-hex-success" class="jquery-hidden label label-success">Programming succeeded</span>
 
         <!--
           For a visually more attractive file upload control see:
@@ -108,6 +119,8 @@ body {
 
             <a id="fuses-set" href="#" class="btn btn-danger wide-button vbottom">Set</a>
             <img id="fuses-loading" class="hidden" src="ajax-loader.gif">
+            <span id="fuses-query-success" class="jquery-hidden label label-success raise-8px">Query succeeded</span>
+            <span id="fuses-set-success" class="jquery-hidden label label-success raise-8px">Query succeeded</span>
         </div>
 
         <p></p>
@@ -129,6 +142,8 @@ body {
 
             <a id ="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
             <img id="lock-bits-loading" class="hidden" src="ajax-loader.gif">
+            <span id="lock-bits-query-success" class="jquery-hidden label label-success">Query succeeded</span>
+            <span id="lock-bits-set-success" class="jquery-hidden label label-success">Set succeeded</span>
         </div>
     </div>
 </div>
@@ -148,8 +163,10 @@ body {
 
     <script>
     (function ($) {
+        // Comment magic to inform Cloud9 hinter of unknown external entities.
+        /* global sprintf */
 
-        wireUpButton('#signature-query', '#signature-loading', 'action/getSignature', function (result) {
+        wireUpButton('#signature-query', '#signature-loading', '#signature-success', 'action/getSignature', function (result) {
             // TODO: check success.
 
             var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
@@ -157,15 +174,15 @@ body {
             $('#signature-result').text(s);
         });
 
-        wireUpForm('#upload-hex-submit', '#upload-hex-loading', '#upload-hex-form', function (result) {
+        wireUpForm('#upload-hex-submit', '#upload-hex-loading', '#upload-hex-form', '#upload-hex-success', function (result) {
             alert(result.name + ' - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         });
 
-        wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', function (result) {
+        wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', '#fuses-set-success', function (result) {
             alert(result.name + ' - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         });
 
-        wireUpButton('#fuses-query', '#fuses-loading', 'action/getFuses', function (result) {
+        wireUpButton('#fuses-query', '#fuses-loading', '#fuses-set-success', 'action/getFuses', function (result) {
             // TODO: check success.
 
             $('#lfuse').val(hex(result.lfuse));
@@ -173,11 +190,11 @@ body {
             $('#efuse').val(hex(result.efuse));
         });
 
-        wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', function (result) {
+        wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', '#lock-bits-set-success', function (result) {
             alert(result.name + ' - ' + (result.success ? 'Info: success' : ('Error: ' + result.message)));
         });
 
-        wireUpButton('#lock-bits-query', '#lock-bits-loading', 'action/getLockBits', function (result) {
+        wireUpButton('#lock-bits-query', '#lock-bits-loading', '#lock-bits-query-success', 'action/getLockBits', function (result) {
             // TODO: check success.
 
             $('#lock-bits').val(hex(result.lockBits));
@@ -189,7 +206,7 @@ body {
             return sprintf("0x%02x", i);
         }
 
-        function wireUpForm(buttonId, loadingId, formId, _success) {
+        function wireUpForm(buttonId, loadingId, formId, successId, _success) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
                 $(loadingId).removeClass('hidden');
@@ -198,12 +215,14 @@ body {
                     success: function (result) {
                         $(loadingId).addClass('hidden');
                         _success(result);
+                        $(successId).show();
+                        $(successId).fadeOut(4000);
                     }
                 });
             });
         }
 
-        function wireUpButton(buttonId, loadingId, _url, _success) {
+        function wireUpButton(buttonId, loadingId, successId, _url, _success) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
                 $(loadingId).removeClass('hidden');
@@ -213,6 +232,8 @@ body {
                     success: function (result) {
                         $(loadingId).addClass('hidden');
                         _success(result);
+                        $(successId).show();
+                        $(successId).fadeOut(4000);
                     }
                 });
             });
