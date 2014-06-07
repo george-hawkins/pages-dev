@@ -262,7 +262,7 @@ body {
             });
         }
 
-        function wireUpButton(buttonId, loadingId, successId, _url, _success) {
+        function wireUpButton(buttonId, loadingId, successId, _url, _success, error) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
                 $(loadingId).show();
