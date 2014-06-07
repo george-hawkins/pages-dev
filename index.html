@@ -50,7 +50,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.13</small></p>
+    <p><small>Rev. 0.14</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -240,6 +240,25 @@ body {
             return typeof arg !== 'undefined' ? arg : val;
         }
 
+        function wireUpForm(buttonId, loadingId, formId, successId, _success, error) {
+            wireUp(buttonId, loadingId, successId, _success, error, $(formId).ajaxSubmit);
+        }
+
+        function wireUpButton(buttonId, loadingId, successId, _url, _success, error) {
+            wireUp(buttonId, loadingId, successId, _success, error, $.ajax, { url: _url });
+        }
+
+        function wireUp(buttonId, loadingId, successId, _success, error, ajaxFunction, options) {
+            $(buttonId).click(function (e) {
+                e.preventDefault();
+                $(loadingId).show();
+                ajaxFunction($.extend({
+                    dataType: 'json',
+                    success: createResultHandler(loadingId, successId, _success, error)
+                }, options));
+            });
+        }
+
         function createResultHandler(loadingId, successId, success, error) {
             return function(result) {
                 $(loadingId).hide();
@@ -251,29 +270,6 @@ body {
                     showError(result.message);
                 }
             };
-        }
-
-        function wireUpForm(buttonId, loadingId, formId, successId, _success, error) {
-            $(buttonId).click(function (e) {
-                e.preventDefault();
-                $(loadingId).show();
-                $(formId).ajaxSubmit({
-                    dataType: 'json',
-                    success: createResultHandler(loadingId, successId, _success, error)
-                });
-            });
-        }
-
-        function wireUpButton(buttonId, loadingId, successId, _url, _success, error) {
-            $(buttonId).click(function (e) {
-                e.preventDefault();
-                $(loadingId).show();
-                $.ajax({
-                    url: _url,
-                    dataType: 'json',
-                    success: createResultHandler(loadingId, successId, _success, error)
-                });
-            });
         }
 
         function showError(message) {
