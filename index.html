@@ -264,7 +264,7 @@ body {
                 $(loadingId).hide();
                 if (result.success) {
                     defaultFor(success, $.noop)(result);
-                    $(successId).show().delay(4000).fadeOut();
+                    $(successId).show().delay(2000).fadeOut('slow');
                 } else {
                     defaultFor(error, $.noop)();
                     showError(result.message);
