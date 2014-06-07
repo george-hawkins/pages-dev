@@ -237,7 +237,7 @@ body {
             return typeof arg !== 'undefined' ? arg : val;
         }
 
-        function createResultHandler(loadingId, successId, _success, error) {
+        function createResultHandler(loadingId, successId, success, error) {
             return function(result) {
                 $(loadingId).hide();
                 if (result.success) {
