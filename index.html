@@ -187,6 +187,7 @@ body {
                 $('#signature-result').text(s);
             },
             function () {
+                foo('#signature-result');
                 $('#signature-result').text('');
             }
         );
@@ -202,9 +203,8 @@ body {
                 $('#efuse').val(hex(result.efuse));
             },
             function () {
-                $('#lfuse').val('');
-                $('#hfuse').val('');
-                $('#efuse').val('');
+                foo('#lfuse');
+                clear('#lfuse', '#hfuse', '#efuse');
             }
         );
 
@@ -220,7 +220,6 @@ body {
         );
 
         // TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        // Add Bootstrap model (see Bootstrap Javascript page) for errors.
         // Add error checking for no upload file, missing or non-hex fuse values and lockbits.
         // As the imp has to parse the fuses etc. it might as well also handle the error checking
         // for missing or misformatted values rather than trying to do it in Javascript.
@@ -230,6 +229,16 @@ body {
 
         function hex(i) {
             return sprintf("0x%02x", i);
+        }
+
+        function foo(x) {
+            console.log($(x).get(0));
+        }
+
+        function clear() {
+            for(var i = 0; i < arguments.length; i++) {
+                $(arguments[i]).val('');
+            }
         }
 
         // http://stackoverflow.com/a/894877/245602
