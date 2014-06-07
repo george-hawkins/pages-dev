@@ -187,8 +187,7 @@ body {
                 $('#signature-result').text(s);
             },
             function () {
-                foo('#signature-result');
-                $('#signature-result').text('');
+                $('#signature-result').text(''); // Clear function only works on input elements.
             }
         );
 
@@ -203,9 +202,6 @@ body {
                 $('#efuse').val(hex(result.efuse));
             },
             function () {
-                console.log('x');
-                foo('#lfuse');
-                console.log('y');
                 clear('#lfuse', '#hfuse', '#efuse');
             }
         );
@@ -217,7 +213,7 @@ body {
                 $('#lock-bits').val(hex(result.lockBits));
             },
             function () {
-                $('#lock-bits').val('');
+                clear('#lock-bits');
             }
         );
 
@@ -231,16 +227,6 @@ body {
 
         function hex(i) {
             return sprintf("0x%02x", i);
-        }
-
-        function foo(x) {
-            console.log(hasFunction($(x), 'text'));
-            console.log(hasFunction($(x), 'val'));
-            console.log($(x).get(0).tagName);
-        }
-
-        function hasFunction(o, name) {
-            return typeof o[name] === 'function';
         }
 
         function clear() {
@@ -259,12 +245,9 @@ body {
                 $(loadingId).hide();
                 if (result.success) {
                     defaultFor(success, $.noop)(result);
-                    $(successId).show();
-                    $(successId).fadeOut(4000);
+                    $(successId).show().delay(4000).fadeOut();
                 } else {
-                console.log('a');
                     defaultFor(error, $.noop)();
-                console.log('b');
                     showError(result.message);
                 }
             };
