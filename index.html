@@ -203,7 +203,9 @@ body {
                 $('#efuse').val(hex(result.efuse));
             },
             function () {
+                console.log('x');
                 foo('#lfuse');
+                console.log('y');
                 clear('#lfuse', '#hfuse', '#efuse');
             }
         );
