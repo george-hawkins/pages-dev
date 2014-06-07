@@ -136,11 +136,11 @@ body {
     <div class="panel-body">
         <p>Query or set the lock bits of the AVR MCU.</p>
         <div class="form-inline">
-            <a id ="lock-bits-query" href="#" class="btn btn-primary wide-button">Query</a>
+            <a id="lock-bits-query" href="#" class="btn btn-primary wide-button">Query</a>
 
             <input id="lock-bits" type="text" class="form-control" size="4" placeholder="0x00">
 
-            <a id ="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
+            <a id="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
             <img id="lock-bits-loading" class="jquery-hidden" src="ajax-loader.gif">
             <span id="lock-bits-query-success" class="jquery-hidden label label-success">Query succeeded</span>
             <span id="lock-bits-set-success" class="jquery-hidden label label-success">Set succeeded</span>
@@ -151,13 +151,26 @@ body {
 
     </div><!-- /.container -->
 
+<div id="error-modal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Error</h4>
+      </div>
+      <div class="modal-body">
+        <span id="error-message"><!-- error message --></span>
+      </div>
+    </div>
+  </div>
+</div>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!--
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    -->
 
     <!-- http://stackoverflow.com/a/4545089/245602 http://stackoverflow.com/a/1960245/245602 -->
     <script src="//malsup.github.io/jquery.form.js"></script>
@@ -166,57 +179,43 @@ body {
 
     <script>
     (function ($) {
-        // Comment magic to inform Cloud9 hinter of unknown external entities.
-        /* global sprintf */
 
-        wireUpButton('#signature-query', '#signature-loading', '#signature-success', 'action/getSignature', function (result) {
-            if (result.success) {
+        wireUpButton('#signature-query', '#signature-loading', '#signature-success', 'action/getSignature',
+            function (result) {
                 var s = sprintf("%s (0x%02x, 0x%02x, 0x%02x)",
                     result.description, result.signature[0], result.signature[1], result.signature[2]);
                 $('#signature-result').text(s);
-            } else {
+            },
+            function () {
                 $('#signature-result').text('');
-                alert(result.name + ' - ' + 'Error: ' + result.message);
             }
         });
 
-        wireUpForm('#upload-hex-submit', '#upload-hex-loading', '#upload-hex-form', '#upload-hex-success', function (result) {
-            if (!result.success) {
-                alert(result.name + ' - ' + 'Error: ' + result.message);
-            }
-        });
+        wireUpForm('#upload-hex-submit', '#upload-hex-loading', '#upload-hex-form', '#upload-hex-success');
 
-        wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', '#fuses-set-success', function (result) {
-            if (!result.success) {
-                alert(result.name + ' - ' + 'Error: ' + result.message);
-            }
-        });
+        wireUpForm('#fuses-set', '#fuses-loading', '#fuses-form', '#fuses-set-success');
 
         wireUpButton('#fuses-query', '#fuses-loading', '#fuses-query-success', 'action/getFuses', function (result) {
-            if (result.success) {
+            function (result) {
                 $('#lfuse').val(hex(result.lfuse));
                 $('#hfuse').val(hex(result.hfuse));
                 $('#efuse').val(hex(result.efuse));
-            } else {
+            },
+            function () {
                 $('#lfuse').val('');
                 $('#hfuse').val('');
                 $('#efuse').val('');
-                alert(result.name + ' - ' + 'Error: ' + result.message);
             }
         });
 
-        wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', '#lock-bits-set-success', function (result) {
-            if (!result.success) {
-                alert(result.name + ' - ' + 'Error: ' + result.message);
-            }
-        });
+        wireUpForm('#lock-bits-set', '#lock-bits-loading', '#lock-bits-form', '#lock-bits-set-success');
 
         wireUpButton('#lock-bits-query', '#lock-bits-loading', '#lock-bits-query-success', 'action/getLockBits', function (result) {
-            if (result.success) {
+            function (result) {
                 $('#lock-bits').val(hex(result.lockBits));
-            } else {
+            },
+            function () {
                 $('#lock-bits').val('');
-                alert(result.name + ' - ' + 'Error: ' + result.message);
             }
         });
 
@@ -233,18 +232,32 @@ body {
             return sprintf("0x%02x", i);
         }
 
-        function wireUpForm(buttonId, loadingId, formId, successId, _success) {
+        // http://stackoverflow.com/a/894877/245602
+        function defaultFor(arg, val) {
+            return typeof arg !== 'undefined' ? arg : val;
+        }
+
+        function createResultHandler(loadingId, successId success, error) {
+            return function(result) {
+                $(loadingId).hide();
+                if (result.success) {
+                    defaultFor(success, $.noop)(result);
+                    $(successId).show();
+                    $(successId).fadeOut(4000);
+                } else {
+                    defaultFor(error, $.noop)();
+                    showError(result.message);
+                }
+            }
+        }
+
+        function wireUpForm(buttonId, loadingId, formId, successId, _success, error) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
                 $(loadingId).show();
                 $(formId).ajaxSubmit({
                     dataType: 'json',
-                    success: function (result) {
-                        $(loadingId).hide();
-                        _success(result);
-                        $(successId).show();
-                        $(successId).fadeOut(4000);
-                    }
+                    success: createResultHandler(loadingId, successId, _success, error);
                 });
             });
         }
@@ -256,14 +269,14 @@ body {
                 $.ajax({
                     url: _url,
                     dataType: 'json',
-                    success: function (result) {
-                        $(loadingId).hide();
-                        _success(result);
-                        $(successId).show();
-                        $(successId).fadeOut(4000);
-                    }
+                    success: createResultHandler(loadingId, successId, _success, error);
                 });
             });
+        }
+
+        function showError(message) {
+            $('#error-message').text(message);
+            $('#error-modal').modal('show');
         }
 
     })(jQuery);
