@@ -255,7 +255,7 @@ body {
                 ajaxFunction($.extend({
                     dataType: 'json',
                     success: createResultHandler(loadingId, successId, _success, error)
-                }, options));
+                }, defaultFor(options, {})));
             });
         }
 
