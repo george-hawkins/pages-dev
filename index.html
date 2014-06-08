@@ -50,7 +50,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.15</small></p>
+    <p><small>Rev. 0.16</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -220,7 +220,7 @@ $('#myForm2').submit(function() {
 $('#fake-submit').click(function() { 
     // inside event callbacks 'this' is the DOM element so we first 
     // wrap it in a jQuery object and then invoke ajaxSubmit 
-    $(this).ajaxSubmit({ 
+    $('#myForm2').ajaxSubmit({ 
         beforeSubmit:  showRequest,  // pre-submit callback 
         success:       showResponse  // post-submit callback 
     }); 
