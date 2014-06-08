@@ -157,6 +157,7 @@ body {
             </tr>
         </tbody>
     </table>
+    <a id="fake-submit" href="#" class="btn">Fake Submit</a>
     <input type="submit" name="submitButton" value="Submit1">
 </div></form>
 
@@ -205,6 +206,18 @@ function showResponse(responseText, statusText, xhr, $form)  {
 
 // bind to the form's submit event 
 $('#myForm2').submit(function() { 
+    // inside event callbacks 'this' is the DOM element so we first 
+    // wrap it in a jQuery object and then invoke ajaxSubmit 
+    $(this).ajaxSubmit({ 
+        beforeSubmit:  showRequest,  // pre-submit callback 
+        success:       showResponse  // post-submit callback 
+    }); 
+
+    // !!! Important !!! 
+    // always return false to prevent standard browser submit and page navigation 
+    return false; 
+});
+$('#fake-submit').click(function() { 
     // inside event callbacks 'this' is the DOM element so we first 
     // wrap it in a jQuery object and then invoke ajaxSubmit 
     $(this).ajaxSubmit({ 
