@@ -75,7 +75,7 @@ body {
     </div>
     <div class="panel-body">
         <p>Program the AVR MCU with a HEX <!-- Intel capitalize HEX like this. --> file.</p>
-        <input id="hexFile" type="file">
+        <input id="hexFile" name="hexFile" type="file">
         <p></p>
         <a id="upload-hex-submit" href="#" class="btn btn-primary wide-button">Upload</a>
         <img id="upload-hex-loading" class="jquery-hidden" src="ajax-loader.gif">
@@ -106,15 +106,15 @@ body {
             <!-- low, high, extended is the order used by http://www.engbedded.com/fusecalc -->
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="lfuse">Low</label>
-              <input id="lfuse" type="text" class="form-control" size="4" placeholder="0x00">
+              <input id="lfuse" name="lfuse" type="text" class="form-control" size="4" placeholder="0x00">
             </div>
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="hfuse">High</label>
-              <input id="hfuse" type="text" class="form-control" size="4" placeholder="0x00">
+              <input id="hfuse" name="hfuse" type="text" class="form-control" size="4" placeholder="0x00">
             </div>
             <div class="form-group vbottom inline-group">
               <label class="control-label" for="efuse">Ext</label>
-              <input id="efuse" type="text" class="form-control" size="4" placeholder="0x00">
+              <input id="efuse" name="efuse" type="text" class="form-control" size="4" placeholder="0x00">
             </div>
 
             <a id="fuses-set" href="#" class="btn btn-danger wide-button vbottom">Set</a>
@@ -138,7 +138,7 @@ body {
         <div class="form-inline">
             <a id="lock-bits-query" href="#" class="btn btn-primary wide-button">Query</a>
 
-            <input id="lock-bits" type="text" class="form-control" size="4" placeholder="0x00">
+            <input id="lockBits" name="lockBits" type="text" class="form-control" size="4" placeholder="0x00">
 
             <a id="lock-bits-set" href="#" class="btn btn-danger wide-button">Set</a>
             <img id="lock-bits-loading" class="jquery-hidden" src="ajax-loader.gif">
@@ -150,13 +150,7 @@ body {
 </form>
 
 <form id="myForm2" action="testing" method="GET"><div>
-    <table>
-        <tbody>
-            <tr>
-                <td>Name:</td><td><input name="Name" type="text" value="MyName2"></td>
-            </tr>
-        </tbody>
-    </table>
+    Name: <input name="Name" type="text" value="MyName2">
     <a id="fake-submit" href="#" class="btn">OK</a>
 </div></form>
 
@@ -191,23 +185,12 @@ body {
     <script>
     (function ($) {
 
-function showRequest(formData, jqForm, options) { 
-    var queryString = $.param(formData); 
- 
-    alert('About to submit: \n\n' + queryString); 
- 
-    return true; 
-} 
- 
 function showResponse(responseText, statusText, xhr, $form)  { 
-    alert('1. status: ' + statusText + '\n\nresponseText: \n' + responseText); 
+    alert('responseText: ' + responseText); 
 }
 
 $('#fake-submit').click(function() { 
-    // inside event callbacks 'this' is the DOM element so we first 
-    // wrap it in a jQuery object and then invoke ajaxSubmit 
     $('#myForm2').ajaxSubmit({ 
-        beforeSubmit:  showRequest,  // pre-submit callback 
         success:       showResponse  // post-submit callback 
     }); 
 
@@ -246,10 +229,10 @@ $('#fake-submit').click(function() {
 
         wireUpButton('#lock-bits-query', '#lock-bits-loading', '#lock-bits-query-success', 'action/getLockBits',
             function (result) {
-                $('#lock-bits').val(hex(result.lockBits));
+                $('#lockBits').val(hex(result.lockBits));
             },
             function () {
-                clear('#lock-bits');
+                clear('#lockBits');
             }
         );
 
