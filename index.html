@@ -149,11 +149,6 @@ body {
 </div>
 </form>
 
-<form id="myForm2" action="testing" method="GET"><div>
-    Name: <input name="Name" type="text" value="MyName2">
-    <a id="fake-submit" href="#" class="btn">OK</a>
-</div></form>
-
     </div><!-- /.container -->
 
 <div id="error-modal" class="modal fade" tabindex="-1">
@@ -184,20 +179,6 @@ body {
 
     <script>
     (function ($) {
-
-function showResponse(responseText, statusText, xhr, $form)  { 
-    alert('responseText: ' + responseText); 
-}
-
-$('#fake-submit').click(function() { 
-    $('#myForm2').ajaxSubmit({ 
-        success:       showResponse  // post-submit callback 
-    }); 
-
-    // !!! Important !!! 
-    // always return false to prevent standard browser submit and page navigation 
-    return false; 
-});
 
         wireUpButton('#signature-query', '#signature-loading', '#signature-success', 'action/getSignature',
             function (result) {
