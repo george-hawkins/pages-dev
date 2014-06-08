@@ -149,6 +149,18 @@ body {
 </div>
 </form>
 
+<form id="myForm2" action="/testing" method="post"><div>
+    <table>
+        <tbody>
+            <tr>
+                <td>Name:</td><td><input name="Name" type="text" value="MyName2"></td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="reset" name="resetButton " value="Reset">
+    <input type="submit" name="submitButton" value="Submit1">
+</div></form>
+
     </div><!-- /.container -->
 
 <div id="error-modal" class="modal fade" tabindex="-1">
@@ -179,6 +191,32 @@ body {
 
     <script>
     (function ($) {
+
+function showRequest(formData, jqForm, options) { 
+    var queryString = $.param(formData); 
+ 
+    alert('About to submit: \n\n' + queryString); 
+ 
+    return true; 
+} 
+ 
+function showResponse(responseText, statusText, xhr, $form)  { 
+    alert('1. status: ' + statusText + '\n\nresponseText: \n' + responseText); 
+}
+
+// bind to the form's submit event 
+$('#myForm2').submit(function() { 
+    // inside event callbacks 'this' is the DOM element so we first 
+    // wrap it in a jQuery object and then invoke ajaxSubmit 
+    $(this).ajaxSubmit({ 
+        beforeSubmit:  showRequest,  // pre-submit callback 
+        success:       showResponse  // post-submit callback 
+    }); 
+
+    // !!! Important !!! 
+    // always return false to prevent standard browser submit and page navigation 
+    return false; 
+});
 
         wireUpButton('#signature-query', '#signature-loading', '#signature-success', 'action/getSignature',
             function (result) {
