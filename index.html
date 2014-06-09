@@ -284,9 +284,11 @@ body {
             return function (xhr, status, error) {
                 $(loadingId).hide();
 
+                console.log('ABC');
                 showError(
                     'The action failed. The IDE device log may contain clues. [ status: ' +
                     quote(status) + ', error: ' + quote(error) + ' ]');
+                console.log('XYZ');
             }
         }
 
