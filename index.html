@@ -255,7 +255,7 @@ body {
                     dataType: 'json',
                     success: createResultHandler(loadingId, successId, _success, error),
                     error: createErrorHandler(loadingId),
-                    timeout: 10000 // TODO: is this long enough for programming big memory devices?
+                    timeout: 10000 // TODO: is 10s long enough for programming big memory devices?
                 }, options));
             });
             // By default the call would not timeout. Rather the agent server seems to close unused
