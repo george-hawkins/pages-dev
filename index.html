@@ -275,7 +275,7 @@ body {
             };
         }
 
-        function errorHandler(jqXHR, status, errorThrown) {
+        function errorHandler(jqXHR, status, error) {
             var message = 'The action failed. The IDE device log may contain clues.\n';
 
             message += 'status: ' + (status ? '"' + status + '"' : 'null') + '\n';
