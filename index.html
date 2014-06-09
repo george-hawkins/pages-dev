@@ -255,7 +255,7 @@ body {
                     dataType: 'json',
                     success: createResultHandler(loadingId, successId, _success, error),
                     error: createErrorHandler(loadingId),
-                    timeout: 10000 // TODO: is 10s long enough for programming big memory devices?
+                    timeout: 10000 // TODO: is 10s long enough (for 64KB blob - limited by non-chunked approach and Imp memory size).
                 }, options));
             });
             // By default the call would not timeout. Rather the agent server seems to close unused
@@ -286,6 +286,7 @@ body {
 
                 showError(
                     'The action failed (status: ' + quote(status) + ', error: ' + quote(error) +
+                    ', xhr: ' + JSON.stringify(xhr) +
                     '). The IDE device log may contain some clues.');
             }
         }
