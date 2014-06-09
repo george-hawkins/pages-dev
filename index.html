@@ -253,9 +253,14 @@ body {
                 $(loadingId).show();
                 ajaxFunction($.extend({
                     dataType: 'json',
-                    success: createResultHandler(loadingId, successId, _success, error)
+                    success: createResultHandler(loadingId, successId, _success, error),
+                    error: errorHandler
                 }, options));
             });
+        }
+
+        function errorHandler(jqXHR, status, errorThrown) {
+            alert('jqXHR: ' + JSON.stringify(jqXHR) + '\nstatus: ' + status + '\nerrorThrown: ' + errorThrown);
         }
 
         function createResultHandler(loadingId, successId, success, error) {
@@ -264,7 +269,7 @@ body {
                 if (result.success) {
                     defaultFor(success, $.noop)(result);
                     $(successId).show().delay(4000).fadeOut('slow');
-                } else {
+                } else { // Ajax succeeded but the underlying agent/imp action failed.
                     defaultFor(error, $.noop)();
                     showError(result.message);
                 }
