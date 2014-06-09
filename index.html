@@ -254,13 +254,12 @@ body {
                 ajaxFunction($.extend({
                     dataType: 'json',
                     success: createResultHandler(loadingId, successId, _success, error),
-                    error: errorHandler
+                    error: errorHandler,
+                    timeout: 10000 // TODO: is this long enough for programming big memory devices?
                 }, options));
             });
-        }
-
-        function errorHandler(jqXHR, status, errorThrown) {
-            alert('jqXHR: ' + JSON.stringify(jqXHR) + '\nstatus: ' + status + '\nerrorThrown: ' + errorThrown);
+            // By default the call would not timeout. Rather the agent server seems to close unused
+            // connections after 8 minutes - which results in an empty response rather than a timeout.
         }
 
         function createResultHandler(loadingId, successId, success, error) {
@@ -274,6 +273,15 @@ body {
                     showError(result.message);
                 }
             };
+        }
+
+        function errorHandler(jqXHR, status, errorThrown) {
+            var message = 'The action failed. The IDE device log may contain clues.\n';
+
+            message += 'status: ' + (status ? '"' + status + '"' : 'null') + '\n';
+            message += 'error: ' + (error ? '"' + error + '"' : 'null');
+
+            showError(message);
         }
 
         function showError(message) {
