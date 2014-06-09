@@ -254,7 +254,7 @@ body {
                 ajaxFunction($.extend({
                     dataType: 'json',
                     success: createResultHandler(loadingId, successId, _success, error),
-                    error: errorHandler,
+                    error: createResultHandler(loadingId),
                     timeout: 10000 // TODO: is this long enough for programming big memory devices?
                 }, options));
             });
@@ -263,7 +263,7 @@ body {
         }
 
         function createResultHandler(loadingId, successId, success, error) {
-            return function(result) {
+            return function (result) {
                 $(loadingId).hide();
                 if (result.success) {
                     defaultFor(success, $.noop)(result);
@@ -275,13 +275,19 @@ body {
             };
         }
 
-        function errorHandler(jqXHR, status, error) {
-            var message = 'The action failed. The IDE device log may contain clues. [';
+        function quote(s) {
+            // Will actually return 'null' for null or the empty string.
+            return s ? '"' + s + '"' : 'null';
+        }
 
-            message += 'status: ' + (status ? '"' + status + '"' : 'null') + ', ';
-            message += 'error: ' + (error ? '"' + error + '"' : 'null') + ' ]';
+        function createErrorHandler(loadingId) {
+            return function (xhr, status, error) {
+                $(loadingId).hide();
 
-            showError(message);
+                showError(
+                    'The action failed. The IDE device log may contain clues. [ status: ' +
+                    quote(status) + ', error: ' + quote(error) + ' ]');
+            }
         }
 
         function showError(message) {
