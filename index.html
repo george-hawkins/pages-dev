@@ -247,14 +247,14 @@ body {
             wireUp(buttonId, loadingId, successId, _success, error, $.ajax, { url: _url });
         }
 
-        function wireUp(buttonId, loadingId, successId, _success, error, ajaxFunction, options) {
+        function wireUp(buttonId, loadingId, successId, _success, _error, ajaxFunction, options) {
             $(buttonId).click(function (e) {
                 e.preventDefault();
                 $(loadingId).show();
                 ajaxFunction($.extend({
                     dataType: 'json',
-                    success: createResultHandler(loadingId, successId, _success, error),
-                    error: createErrorHandler(loadingId),
+                    success: createResultHandler(loadingId, successId, _success),
+                    error: createErrorHandler(loadingId, _error),
                     timeout: 10000 // TODO: is 10s long enough (for 64KB blob - limited by non-chunked approach and Imp memory size).
                 }, options));
             });
@@ -262,32 +262,36 @@ body {
             // connections after 8 minutes - which results in an empty response rather than a timeout.
         }
 
-        function createResultHandler(loadingId, successId, success, error) {
+        function createResultHandler(loadingId, successId, success) {
             return function (result) {
                 $(loadingId).hide();
-                if (result.success) {
-                    defaultFor(success, $.noop)(result);
-                    $(successId).show().delay(4000).fadeOut('slow');
-                } else { // Ajax succeeded but the underlying agent/imp action failed.
-                    defaultFor(error, $.noop)();
-                    showError(result.message);
-                }
+                defaultFor(success, $.noop)(result);
+                $(successId).show().delay(4000).fadeOut('slow');
             };
         }
 
-        function quote(s) {
-            // Will actually return 'null' for null or the empty string.
-            return s ? '"' + s + '"' : 'null';
+        function createErrorHandler(loadingId, error) {
+            return function (xhr) {
+                $(loadingId).hide();
+                defaultFor(error, $.noop)();
+                showError(getErrorMessage(xhr));
+            };
         }
 
-        function createErrorHandler(loadingId) {
-            return function (xhr, status, error) {
-                $(loadingId).hide();
+        // Create unconnected <div> element for utility use.
+        // http://api.jquery.com/jQuery/#creating-new-elements
+        var DIV_ELEM = $('<div/>');
 
-                showError(
-                    'The action failed (status: ' + quote(status) + ', error: ' + quote(error) +
-                    ', xhr: ' + JSON.stringify(xhr) +
-                    '). The IDE device log may contain some clues.');
+        function htmlEscape(s) {
+            // http://stackoverflow.com/a/374176/245602
+            return DIV_ELEM.text(s).html();
+        }
+
+        function getErrorMessage(xhr) {
+            if ('responseJSON' in xhr && 'message' in xhr.responseJSON) {
+                return xhr.responseJSON.message;
+            } else {
+                return 'The action failed. The IDE device log may contain some clues.<br>' + htmlEscape(xhr);
             }
         }
 
