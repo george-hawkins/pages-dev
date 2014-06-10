@@ -291,21 +291,7 @@ body {
         }
 
         function getErrorMessage(xhr) {
-            console.log(JSON.stringify(xhr));
-            if ('responseJSON' in xhr) {
-                console.log('A');
-                console.log(typeof xhr.responseJSON);
-                console.log(xhr.responseJSON == null ? 'null' : 'not null');
-            } else {
-                console.log('B');
-            }
-            if ('responseJSON' in xhr && 'message' in xhr.responseJSON) {
-                console.log('1');
-            } else {
-                console.log('2');
-            }
-
-            if ('responseJSON' in xhr && 'message' in xhr.responseJSON) {
+            if (xhr['responseJSON'] && xhr.responseJSON['message']) {
                 return xhr.responseJSON.message;
             } else {
                 return 'The action failed. The IDE device log may contain some clues.<br>' + htmlEscape(JSON.stringify(xhr));
