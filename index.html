@@ -256,16 +256,16 @@ body {
                 $(loadingId).show();
                 ajaxFunction($.extend({
                     dataType: 'json',
-                    success: createResultHandler(loadingId, successId, _success),
+                    success: createSuccessHandler(loadingId, successId, _success),
                     error: createErrorHandler(loadingId, _error),
                     timeout: 10000 // TODO: is 10s long enough (for 64KB blob - limited by non-chunked approach and Imp memory size).
                 }, options));
             });
-            // By default the call would not timeout. Rather the agent server seems to close unused
-            // connections after 8 minutes - which results in an empty response rather than a timeout.
+            // If the timeout property is not set the call waits indefinitely. However the agent server seems to
+            // close unused connections after 8 minutes - which results in an empty response rather than a timeout.
         }
 
-        function createResultHandler(loadingId, successId, success) {
+        function createSuccessHandler(loadingId, successId, success) {
             return function (result) {
                 $(loadingId).hide();
                 defaultFor(success, $.noop)(result);
