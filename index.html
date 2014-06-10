@@ -277,7 +277,7 @@ body {
             return function (xhr) {
                 $(loadingId).hide();
                 defaultFor(error, $.noop)();
-                showError(getErrorMessage(xhr));
+                showHtmlError(getErrorMessage(xhr));
             };
         }
 
@@ -292,14 +292,15 @@ body {
 
         function getErrorMessage(xhr) {
             if (xhr['responseJSON'] && xhr.responseJSON['message']) {
-                return xhr.responseJSON.message;
+                return htmlEscape(xhr.responseJSON.message);
             } else {
                 return 'The action failed. The IDE device log may contain some clues.<br>' + htmlEscape(JSON.stringify(xhr));
             }
         }
 
-        function showError(message) {
-            $('#error-message').text(message);
+        function showHtmlError(message) {
+            // If you use .text(...) rather than .html(...) then jQuery will HTML escape the text for you.
+            $('#error-message').html(message);
             $('#error-modal').modal('show');
         }
 
