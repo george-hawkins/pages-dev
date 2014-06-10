@@ -172,6 +172,9 @@ body {
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+    <!-- https://github.com/bestiejs/json3 - provide JSON or use browser default. -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json3/3.3.1/json3.min.js"></script>
+
     <!-- http://stackoverflow.com/a/4545089/245602 http://stackoverflow.com/a/1960245/245602 -->
     <script src="//malsup.github.io/jquery.form.js"></script>
 
@@ -288,10 +291,22 @@ body {
         }
 
         function getErrorMessage(xhr) {
+            console.log(JSON.stringify(xhr));
+            if ('responseJSON' in xhr) {
+                console.log('A');
+            } else {
+                console.log('B');
+            }
+            if ('responseJSON' in xhr && 'message' in xhr.responseJSON) {
+                console.log('1');
+            } else {
+                console.log('2');
+            }
+
             if ('responseJSON' in xhr && 'message' in xhr.responseJSON) {
                 return xhr.responseJSON.message;
             } else {
-                return 'The action failed. The IDE device log may contain some clues.<br>' + htmlEscape(xhr);
+                return 'The action failed. The IDE device log may contain some clues.<br>' + htmlEscape(JSON.stringify(xhr));
             }
         }
 
