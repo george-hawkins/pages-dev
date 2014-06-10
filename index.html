@@ -294,7 +294,7 @@ body {
             if (xhr['responseJSON'] && xhr.responseJSON['message']) {
                 return htmlEscape(xhr.responseJSON.message);
             } else {
-                return 'The action failed. The IDE device log may contain some clues.<br>' + htmlEscape(JSON.stringify(xhr));
+                return 'The action failed. The IDE device log may contain some clues.<p>jqXHR: ' + htmlEscape(JSON.stringify(xhr));
             }
         }
 
