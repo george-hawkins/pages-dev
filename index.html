@@ -291,6 +291,7 @@ body {
         }
 
         function getErrorMessage(xhr) {
+            // A nice JSON bundled error sent by the application or something more fundamental...
             if (xhr['responseJSON'] && xhr.responseJSON['message']) {
                 return htmlEscape(xhr.responseJSON.message);
             } else {
