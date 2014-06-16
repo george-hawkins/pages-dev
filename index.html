@@ -50,7 +50,7 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
-    <p><small>Rev. 0.16</small></p>
+    <p><small>Rev. 0.17</small></p>
 </div>
 
 <div class="panel panel-default">
@@ -258,9 +258,13 @@ body {
                     dataType: 'json',
                     success: createSuccessHandler(loadingId, successId, _success),
                     error: createErrorHandler(loadingId, _error),
-                    timeout: 10000 // TODO: is 10s long enough (for 64KB blob - limited by non-chunked approach and Imp memory size).
+                    timeout: 30000
                 }, options));
             });
+            // TODO: check if timeout is long enough (for a 64KB blob - limited by Imp memory size and current
+            // non-chunked approach).
+            // The timeout needs to be particularly long not just for programming but also to account for the time
+            // when a part needs to be looked up and the Heroku dyno needs to spin up after not been used recently.
             // If the timeout property is not set the call waits indefinitely. However the agent server seems to
             // close unused connections after 8 minutes - which results in an empty response rather than a timeout.
         }
