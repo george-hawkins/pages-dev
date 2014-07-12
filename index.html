@@ -19,6 +19,7 @@
 /* Space out content a bit */
 body {
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 .wide-button {
     min-width: 80px;
@@ -50,6 +51,9 @@ body {
 <div class="jumbotron">
     <h1><nobr>In-System</nobr> Programmer<img src="//electricimp.com/public/img/logosmall.png" alt="[logo]"></h1>
     <p>An Electric Imp based in-system programmer for Atmel AVR MCUs.</p>
+    <p>See the
+    <a href="https://github.com/george-hawkins/electric-imp/tree/master/in-system-programmer" target="_blank">in-system-programmer</a>
+    repository on GitHub for more details.</p>
     <p><small>Rev. 0.17</small></p>
 </div>
 
@@ -151,20 +155,29 @@ body {
 
     </div><!-- /.container -->
 
-<div id="error-modal" class="modal fade" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    <footer class="bs-docs-footer">
+        <div class="container">
+            Copyright &copy; 2014 George C. Hawkins, Licensed under the
+                <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.<br>
+             Electric Imp and the Electric Imp logo are trademarks of
+                <a href="http://electricimp.com/" target="_blank">Electric Imp, Inc</a>.
+        </div>
+    </footer>
 
-      <div class="modal-header">
-        <button class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Error</h4>
-      </div>
-      <div class="modal-body">
-        <span id="error-message"><!-- error message --></span>
+    <div id="error-modal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Error</h4>
+          </div>
+          <div class="modal-body">
+            <span id="error-message"><!-- error message --></span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -258,13 +271,9 @@ body {
                     dataType: 'json',
                     success: createSuccessHandler(loadingId, successId, _success),
                     error: createErrorHandler(loadingId, _error),
-                    timeout: 30000
+                    timeout: 300000 // 5 minutes.
                 }, options));
             });
-            // TODO: check if timeout is long enough (for a 64KB blob - limited by Imp memory size and current
-            // non-chunked approach).
-            // The timeout needs to be particularly long not just for programming but also to account for the time
-            // when a part needs to be looked up and the Heroku dyno needs to spin up after not been used recently.
             // If the timeout property is not set the call waits indefinitely. However the agent server seems to
             // close unused connections after 8 minutes - which results in an empty response rather than a timeout.
         }
