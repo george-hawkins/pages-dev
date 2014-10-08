@@ -1,5 +1,26 @@
+Adafruit LCDs & Displays
+========================
 
-characterics along top, ala wikipedia, allow sort by column, sorted on type (i.e. character, eInk etc.) initially.
+This page shows all the non-discontinued products from the [LCDs and Displays](http://www.adafruit.com/categories/63) section of the Adafruit shop as of October 8th, 2014.
+
+The products are grouped into the same subcategories that Adafruit use.
+
+In each subcategory I've attempted to group the products in a logical manner.
+
+Each product has a product ID (PID), e.g. 181, just click on the PID link for a given product for the Adafruit product page.
+
+Contents
+--------
+* [Character](#character)
+* [Graphic LCD](#graphic-lcd)
+* [OLED](#oled)
+* [Graphic TFT](#graphic-tft)
+* [Graphic LED](#graphic-led)
+* [eInk/ePaper](#einkepaper)
+* [HDMI/VGA/NTSC/PAL displays](#hdmivgantscpal-displays)
+* [NTSC/PAL TFTs](#ntscpal-tfts)
+* [Retina](#retina)
+* [Acccessories](#acccessories)
 
 Character
 ---------
@@ -30,7 +51,7 @@ Graphic LCD
 | ![338](http://www.adafruit.com/images/230x173/338-00.jpg) | $10.00 | ![o](one.png) | [338](http://www.adafruit.com/products/338) | Nokia 5110/3310 monochrome LCD + extras |
 | ![773](http://www.adafruit.com/images/230x173/773-00.jpg) | $94.95 | ![o](one.png) | [773](http://www.adafruit.com/products/773) | 128x64 Graphic VFD (Vacuum Fluorescent Display) - SPI interface |
 
-Adafruit include 773 in both the Graphic LCD subcategory and also as the only item non-discontinued item in the VFD subcategory. Here it's only included in the Graphic LCD subcategory and the VFD subcategory is omitted.
+Adafruit include 773 in both the Graphic LCD subcategory and also as the only non-discontinued item in the VFD subcategory. Here it's only included in the Graphic LCD subcategory and the VFD subcategory is omitted.
 
 OLED
 ----
@@ -69,7 +90,7 @@ Graphic TFT
 
 1591 and 1596 require 1590 as a driver, while 1680 requires 1932 as a driver.
 
-2050 and 1770 are resistive touch, while 2090 is a more expensive capacitive touch variant of the 1770.
+2050 and 1770 are resistive touch, while 2090 is a more expensive capacitive touch variant of 1770.
 
 Graphic LED
 -----------
@@ -83,8 +104,8 @@ Graphic LED
 
 There are more LED variants in the separate [LEDs category](http://www.adafruit.com/categories/37),
 the LEDs category has a subcategory [RGB matrices](http://www.adafruit.com/categories/327) but it doesn't contain all such items,
-e.g. while the [4mm](http://www.adafruit.com/products/607)) and [6mm](http://www.adafruit.com/products/1484) pitch 32x32 matrices are there,
-the [5mm](http://www.adafruit.com/products/2026)) is for some reason in the "other matrices" subcategory.
+e.g. while the [4mm](http://www.adafruit.com/products/607) and [6mm](http://www.adafruit.com/products/1484) pitch 32x32 matrices are there,
+the [5mm](http://www.adafruit.com/products/2026) is for some reason in the [other matrices](http://www.adafruit.com/categories/88) subcategory.
 
 eInk/ePaper
 -----------
@@ -98,6 +119,13 @@ eInk/ePaper
 
 HDMI/VGA/NTSC/PAL displays
 --------------------------
+
+Prices in this subcategory primarily vary according to:
+* Resolution, e.g. 800x480 or 1280x800.
+* Touch screen or non-touch screen.
+* Inputs, e.g. just HDMI or more options.
+
+The IPS displays have a larger viewing angle than the non-IPS displays.
 
 |     | Price |     | PID | Description |
 | --- | -----:| --- | ---:| ----------- |
@@ -117,19 +145,14 @@ HDMI/VGA/NTSC/PAL displays
 | ![1033](http://www.adafruit.com/images/230x173/1033-00.jpg) | $159.95 | ![t](top.png) | [1033](http://www.adafruit.com/products/1033) | HDMI 4 Pi - 7" Display 1280x800 (720p) IPS - HDMI/VGA/PAL/NTSC |
 | ![1667](http://www.adafruit.com/images/230x173/1667-00.jpg) | $169.95 | ![b](bot.png) | [1667](http://www.adafruit.com/products/1667) | 7" Display 1280x800 (720p) IPS + Speakers - HDMI/VGA/NTSC/PAL |
 
-Prices in this subcategory primarily vary according to:
-* Resolution, e.g. 800x480 or 1280x800.
-* Touch screen or non-touch screen.
-* Inputs, e.g. just HDMI or more options.
-
 1678, 1928, 2109 and 2110 all have exactly the same screen.
-
-The IPS displays have a larger viewing angle than the non-IPS displays.
 
 1303 has a daylight visible grayscale mode.
 
 NTSC/PAL TFTs
 -------------
+
+These really are old school TVs, i.e. analog only.
 
 |     | Price |     | PID | Description |
 | --- | -----:| --- | ---:| ----------- |
@@ -141,8 +164,6 @@ NTSC/PAL TFTs
 | ![947](http://www.adafruit.com/images/230x173/947-02.jpg)   |  $74.95 | ![b](bot.png) |  [947](http://www.adafruit.com/products/947)  | NTSC/PAL (Television) TFT Display - 7" Diagonal |
 | ![1452](http://www.adafruit.com/images/230x173/1452-00.jpg) | $109.95 | ![o](one.png) | [1452](http://www.adafruit.com/products/1452) | NTSC/PAL (Television) Video Glasses |
 | ![951](http://www.adafruit.com/images/230x173/951-00.jpg)   |   $1.50 | ![o](one.png) |  [951](http://www.adafruit.com/products/951)  | RCA coupler - Male to Male |
-
-These really are old school TVs, i.e. analog only.
 
 Retina
 ------
