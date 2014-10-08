@@ -18,16 +18,6 @@ Character
 | ![292](http://www.adafruit.com/images/230x173/292-00.jpg)   | $10.00 | ![o](one.png) |  [292](http://www.adafruit.com/products/292)  | i2c / SPI character LCD backpack |
 | ![1365](http://www.adafruit.com/images/230x173/1365-00.jpg) |  $4.95 | ![o](one.png) | [1365](http://www.adafruit.com/products/1365) | Acrylic Stand for 16x2 Character LCD |
 
-eInk/ePaper
------------
-
-|     | Price |     | PID | Description |
-| --- | -----:| --- | ---:| ----------- |
-| ![1347](http://www.adafruit.com/images/230x173/1347-00.jpg) | $32.95 | ![t](top.png) | [1347](http://www.adafruit.com/products/1347) | RePaper - 1.44" Graphic eInk Development Board |
-| ![1316](http://www.adafruit.com/images/230x173/1316-00.jpg) | $34.95 | ![m](mid.png) | [1316](http://www.adafruit.com/products/1316) | RePaper - 2.0" Graphic eInk Development Board |
-| ![1346](http://www.adafruit.com/images/230x173/1346-00.jpg) | $39.95 | ![b](bot.png) | [1346](http://www.adafruit.com/products/1346) | RePaper - 2.7" Graphic eInk Development Board |
-| ![1393](http://www.adafruit.com/images/230x173/1393-00.jpg) | $39.95 | ![o](one.png) | [1393](http://www.adafruit.com/products/1393) | SHARP Memory Display Breakout - 1.3" 96x96 Silver Monochrome |
-
 Graphic LCD
 -----------
 
@@ -38,23 +28,22 @@ Graphic LCD
 | ![188](http://www.adafruit.com/images/230x173/188-00.jpg) | $24.00 | ![t](top.png) | [188](http://www.adafruit.com/products/188) | Graphic KS0108 LCD 128x64 + extras - XXX - blue bg, white fg |
 | ![253](http://www.adafruit.com/images/230x173/253-00.jpg) | $30.00 | ![b](bot.png) | [253](http://www.adafruit.com/products/253) | MONOCHRON KS0108 Graphic LCD - XXX - black bg, white fg |
 | ![338](http://www.adafruit.com/images/230x173/338-00.jpg) | $10.00 | ![o](one.png) | [338](http://www.adafruit.com/products/338) | Nokia 5110/3310 monochrome LCD + extras |
+| ![773](http://www.adafruit.com/images/230x173/773-00.jpg) | $94.95 | ![o](one.png) | [773](http://www.adafruit.com/products/773) | 128x64 Graphic VFD (Vacuum Fluorescent Display) - SPI interface |
 
-Adafruit include 938 in this subcategory and in the OLED subcategory - here it's only included in the OLED subcategory.
+Adafruit include 773 in both the Graphic LCD subcategory and also as the only item non-discontinued item in the VFD subcategory. Here it's only included in the Graphic LCD subcategory and the VFD subcategory is omitted.
 
-Graphic LED
------------
+OLED
+----
 
 |     | Price |     | PID | Description |
 | --- | -----:| --- | ---:| ----------- |
-| ![420](http://www.adafruit.com/images/230x173/420-00.jpg)   |  $24.95 | ![t](top.png) |  [420](http://www.adafruit.com/products/420)  | Medium 16x32 RGB LED matrix panel |
-| ![607](http://www.adafruit.com/images/230x173/607-00.jpg)   |  $49.95 | ![b](bot.png) |  [607](http://www.adafruit.com/products/607)  | 32x32 RGB LED Matrix Panel - 4mm Pitch |
-| ![555](http://www.adafruit.com/images/230x173/555-00.jpg)   |  $24.95 | ![o](one.png) |  [555](http://www.adafruit.com/products/555)  | 16x24 Red LED Matrix Panel - Chainable HT1632C Driver |
-| ![1357](http://www.adafruit.com/images/230x173/1357-03.jpg) | $225.00 | ![o](one.png) | [1357](http://www.adafruit.com/products/1357) | PIXEL Guts Kit - Bluetooth Controlled 32x32 RGB LED Matrix Kit |
-
-There are more LED variants in the separate [LEDs category](http://www.adafruit.com/categories/37),
-the LEDs category has a subcategory [RGB matrices](http://www.adafruit.com/categories/327) but it doesn't contain all such items,
-e.g. while the [4mm](http://www.adafruit.com/products/607)) and [6mm](http://www.adafruit.com/products/1484) pitch 32x32 matrices are there,
-the [5mm](http://www.adafruit.com/products/2026)) is for some reason in the "other matrices" subcategory.
+| ![661](http://www.adafruit.com/images/230x173/661-00.jpg)   | $17.50 | ![t](top.png) |  [661](http://www.adafruit.com/products/661)  | Monochrome 128x32 SPI OLED graphic display |
+| ![931](http://www.adafruit.com/images/230x173/931-00.jpg)   | $17.50 | ![b](bot.png) |  [931](http://www.adafruit.com/products/931)  | Monochrome 128x32 I2C OLED graphic display |
+| ![326](http://www.adafruit.com/images/230x173/326-00.jpg)   | $19.50 | ![t](top.png) |  [326](http://www.adafruit.com/products/326)  | Monochrome 0.96" 128x64 OLED graphic display |
+| ![938](http://www.adafruit.com/images/230x173/938-00.jpg)   | $24.50 | ![b](bot.png) |  [938](http://www.adafruit.com/products/938)  | Monochrome 1.3" 128x64 OLED graphic display |
+| ![684](http://www.adafruit.com/images/230x173/684-00.jpg)   | $29.95 | ![t](top.png) |  [684](http://www.adafruit.com/products/684)  | OLED Breakout Board - 16-bit Color 0.96" w/microSD holder |
+| ![1673](http://www.adafruit.com/images/230x173/1673-00.jpg) | $34.95 | ![m](mid.png) | [1673](http://www.adafruit.com/products/1673) | OLED Breakout Board - 16-bit Color 1.27" w/microSD holder |
+| ![1431](http://www.adafruit.com/images/230x173/1431-00.jpg) | $39.95 | ![b](bot.png) | [1431](http://www.adafruit.com/products/1431) | OLED Breakout Board - 16-bit Color 1.5" w/microSD holder |
 
 Graphic TFT
 -----------
@@ -81,6 +70,31 @@ Graphic TFT
 1591 and 1596 require 1590 as a driver, while 1680 requires 1932 as a driver.
 
 2050 and 1770 are resistive touch, while 2090 is a more expensive capacitive touch variant of the 1770.
+
+Graphic LED
+-----------
+
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
+| ![420](http://www.adafruit.com/images/230x173/420-00.jpg)   |  $24.95 | ![t](top.png) |  [420](http://www.adafruit.com/products/420)  | Medium 16x32 RGB LED matrix panel |
+| ![607](http://www.adafruit.com/images/230x173/607-00.jpg)   |  $49.95 | ![b](bot.png) |  [607](http://www.adafruit.com/products/607)  | 32x32 RGB LED Matrix Panel - 4mm Pitch |
+| ![555](http://www.adafruit.com/images/230x173/555-00.jpg)   |  $24.95 | ![o](one.png) |  [555](http://www.adafruit.com/products/555)  | 16x24 Red LED Matrix Panel - Chainable HT1632C Driver |
+| ![1357](http://www.adafruit.com/images/230x173/1357-03.jpg) | $225.00 | ![o](one.png) | [1357](http://www.adafruit.com/products/1357) | PIXEL Guts Kit - Bluetooth Controlled 32x32 RGB LED Matrix Kit |
+
+There are more LED variants in the separate [LEDs category](http://www.adafruit.com/categories/37),
+the LEDs category has a subcategory [RGB matrices](http://www.adafruit.com/categories/327) but it doesn't contain all such items,
+e.g. while the [4mm](http://www.adafruit.com/products/607)) and [6mm](http://www.adafruit.com/products/1484) pitch 32x32 matrices are there,
+the [5mm](http://www.adafruit.com/products/2026)) is for some reason in the "other matrices" subcategory.
+
+eInk/ePaper
+-----------
+
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
+| ![1347](http://www.adafruit.com/images/230x173/1347-00.jpg) | $32.95 | ![t](top.png) | [1347](http://www.adafruit.com/products/1347) | RePaper - 1.44" Graphic eInk Development Board |
+| ![1316](http://www.adafruit.com/images/230x173/1316-00.jpg) | $34.95 | ![m](mid.png) | [1316](http://www.adafruit.com/products/1316) | RePaper - 2.0" Graphic eInk Development Board |
+| ![1346](http://www.adafruit.com/images/230x173/1346-00.jpg) | $39.95 | ![b](bot.png) | [1346](http://www.adafruit.com/products/1346) | RePaper - 2.7" Graphic eInk Development Board |
+| ![1393](http://www.adafruit.com/images/230x173/1393-00.jpg) | $39.95 | ![o](one.png) | [1393](http://www.adafruit.com/products/1393) | SHARP Memory Display Breakout - 1.3" 96x96 Silver Monochrome |
 
 HDMI/VGA/NTSC/PAL displays
 --------------------------
@@ -130,19 +144,6 @@ NTSC/PAL TFTs
 
 These really are old school TVs, i.e. analog only.
 
-OLED
-----
-
-|     | Price |     | PID | Description |
-| --- | -----:| --- | ---:| ----------- |
-| ![661](http://www.adafruit.com/images/230x173/661-00.jpg)   | $17.50 | ![t](top.png) |  [661](http://www.adafruit.com/products/661)  | Monochrome 128x32 SPI OLED graphic display |
-| ![931](http://www.adafruit.com/images/230x173/931-00.jpg)   | $17.50 | ![b](bot.png) |  [931](http://www.adafruit.com/products/931)  | Monochrome 128x32 I2C OLED graphic display |
-| ![326](http://www.adafruit.com/images/230x173/326-00.jpg)   | $19.50 | ![t](top.png) |  [326](http://www.adafruit.com/products/326)  | Monochrome 0.96" 128x64 OLED graphic display |
-| ![938](http://www.adafruit.com/images/230x173/938-00.jpg)   | $24.50 | ![b](bot.png) |  [938](http://www.adafruit.com/products/938)  | Monochrome 1.3" 128x64 OLED graphic display |
-| ![684](http://www.adafruit.com/images/230x173/684-00.jpg)   | $29.95 | ![t](top.png) |  [684](http://www.adafruit.com/products/684)  | OLED Breakout Board - 16-bit Color 0.96" w/microSD holder |
-| ![1673](http://www.adafruit.com/images/230x173/1673-00.jpg) | $34.95 | ![m](mid.png) | [1673](http://www.adafruit.com/products/1673) | OLED Breakout Board - 16-bit Color 1.27" w/microSD holder |
-| ![1431](http://www.adafruit.com/images/230x173/1431-00.jpg) | $39.95 | ![b](bot.png) | [1431](http://www.adafruit.com/products/1431) | OLED Breakout Board - 16-bit Color 1.5" w/microSD holder |
-
 Retina
 ------
 
@@ -153,13 +154,6 @@ Retina
 | ![1652](http://www.adafruit.com/images/230x173/1652-00.jpg) | $224.95 | ![o](one.png) | [1652](http://www.adafruit.com/products/1652) | Adafruit Qualia 9.7" DisplayPort Monitor - 2048x1536 Resolution |
 
 1652 is 1716 and 1751 combined with a plastic enclosure kit.
-
-VFD
----
-
-|     | Price |     | PID | Description |
-| --- | -----:| --- | ---:| ----------- |
-| ![773](http://www.adafruit.com/images/230x173/773-00.jpg) | $94.95 | ![o](one.png) | [773](http://www.adafruit.com/products/773) | 128x64 Graphic VFD (Vacuum Fluorescent Display) - SPI interface |
 
 Acccessories
 ------------
