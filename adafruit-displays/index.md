@@ -7,7 +7,7 @@ The products are grouped into the same subcategories that Adafruit use.
 
 In each subcategory I've attempted to group the products in a logical manner.
 
-Each product has a product ID (PID), e.g. 181, just click on the PID link for a given product for the Adafruit product page.
+Each product has a product ID (PID), e.g. 181, just click on the PID link for a given product to go to the relevant Adafruit product page.
 
 ### Contents
 * [Character](#character)
