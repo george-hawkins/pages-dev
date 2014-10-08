@@ -4,8 +4,8 @@ characterics along top, ala wikipedia, allow sort by column, sorted on type (i.e
 Character
 ---------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![823](http://www.adafruit.com/images/230x173/823-00.jpg)   | $27.95 | ![o](one.png) |  823 | Blue Character OLED 16x2 |
 | ![181](http://www.adafruit.com/images/230x173/181-00.jpg)   | $9.95  | ![t](top.png) |  181 | Standard LCD 16x2 + extras |
 | ![198](http://www.adafruit.com/images/230x173/198-00.jpg)   | $17.95 | ![b](bot.png) |  198 | Standard LCD 20x4 + extras |
@@ -21,8 +21,8 @@ Character
 eInk/ePaper
 -----------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![1393](http://www.adafruit.com/images/230x173/1393-00.jpg) | $39.95 | ![o](one.png) | 1393 | SHARP Memory Display Breakout - 1.3" 96x96 Silver Monochrome |
 | ![1347](http://www.adafruit.com/images/230x173/1347-00.jpg) | $32.95 | ![t](top.png) | 1347 | RePaper - 1.44" Graphic eInk Development Board |
 | ![1346](http://www.adafruit.com/images/230x173/1346-00.jpg) | $39.95 | ![m](mid.png) | 1346 | RePaper - 2.7" Graphic eInk Development Board |
@@ -31,8 +31,8 @@ eInk/ePaper
 Graphic LCD
 -----------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![338](http://www.adafruit.com/images/230x173/338-00.jpg) | $10.00 | ![o](one.png) | 338 | Nokia 5110/3310 monochrome LCD + extras |
 | ![250](http://www.adafruit.com/images/230x173/250-00.jpg) | $17.95 | ![t](top.png) | 250 | Graphic ST7565 Positive LCD (128x64) with RGB backlight + extras |
 | ![438](http://www.adafruit.com/images/230x173/438-00.jpg) | $18.95 | ![b](bot.png) | 438 | Graphic ST7565 Negative LCD (128x64) with RGB backlight + extras |
@@ -43,8 +43,8 @@ Note: 938 is duplicated between this subcategory and the OLED subcategory - I've
 Graphic LED
 -----------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![420](http://www.adafruit.com/images/230x173/420-00.jpg)   |  $24.95 | ![t](top.png) |  420 | Medium 16x32 RGB LED matrix panel |
 | ![607](http://www.adafruit.com/images/230x173/607-00.jpg)   |  $49.95 | ![b](bot.png) |  607 | 32x32 RGB LED Matrix Panel - 4mm Pitch |
 | ![555](http://www.adafruit.com/images/230x173/555-00.jpg)   |  $24.95 | ![o](one.png) |  555 | 16x24 Red LED Matrix Panel - Chainable HT1632C Driver |
@@ -54,8 +54,8 @@ Note: there are more LED variants in the separate LEDs category http://www.adafr
 Graphic TFT
 -----------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![2088](http://www.adafruit.com/images/230x173/2088-10.jpg) | $14.95 | ![t](top.png) | 2088 | Adafruit 1.44" Color TFT LCD Display with MicroSD Card breakout |
 | ![358](http://www.adafruit.com/images/230x173/358-00.jpg)   | $19.95 | ![m](mid.png) |  358 | 1.8" Color TFT LCD display with MicroSD Card Breakout |
 | ![802](http://www.adafruit.com/images/230x173/802-00.jpg)   | $34.95 | ![m](mid.png) |  802 | Adafruit 1.8" Color TFT Shield w/microSD and Joystick |
@@ -77,8 +77,8 @@ Grouping here is fairly arbitrary if you ignore touchscreen and "rawness" you'd 
 HDMI/VGA/NTSC/PAL displays
 --------------------------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![1033](http://www.adafruit.com/images/230x173/1033-00.jpg) | $159.95 | ![t](top.png) | 1033 | HDMI 4 Pi - 7" Display 1280x800 (720p) IPS - HDMI/VGA/PAL/NTSC |
 | ![1667](http://www.adafruit.com/images/230x173/1667-00.jpg) | $169.95 | ![b](bot.png) | 1667 | 7" Display 1280x800 (720p) IPS + Speakers - HDMI/VGA/NTSC/PAL |
 | ![1931](http://www.adafruit.com/images/230x173/1931-05.jpg) | $114.95 | ![t](top.png) | 1931 | HDMI 4 Pi: 7" Display 1280x800 IPS - HDMI/VGA/NTSC/PAL |
@@ -101,8 +101,8 @@ The IPS displays have a larger viewing angle than the non-IPS displays.
 NTSC/PAL TFTs
 -------------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![946](http://www.adafruit.com/images/230x173/946-01.jpg)   |  $49.95 | ![t](top.png) |  946 | NTSC/PAL (Television) TFT Display - 4.3" Diagonal |
 | ![947](http://www.adafruit.com/images/230x173/947-02.jpg)   |  $74.95 | ![b](bot.png) |  947 | NTSC/PAL (Television) TFT Display - 7" Diagonal |
 | ![910](http://www.adafruit.com/images/230x173/910-04.jpg)   |  $39.95 | ![t](top.png) |  910 | NTSC/PAL (Television) TFT Display - 1.5" Diagonal |
@@ -116,8 +116,8 @@ These really are old school TVs, i.e. analog only.
 OLED
 ----
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![326](http://www.adafruit.com/images/230x173/326-00.jpg)   | $19.50 | ![t](top.png) |  326 | Monochrome 0.96" 128x64 OLED graphic display |
 | ![938](http://www.adafruit.com/images/230x173/938-00.jpg)   | $24.50 | ![b](bot.png) |  938 | Monochrome 1.3" 128x64 OLED graphic display |
 | ![661](http://www.adafruit.com/images/230x173/661-00.jpg)   | $17.50 | ![t](top.png) |  661 | Monochrome 128x32 SPI OLED graphic display |
@@ -129,8 +129,8 @@ OLED
 Retina
 ------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![1751](http://www.adafruit.com/images/230x173/1751-00.jpg) |  $99.95 | ![o](one.png) | 1751 | LG LP097QX1 - iPad 3/4 Retina Display |
 | ![1652](http://www.adafruit.com/images/230x173/1652-00.jpg) | $224.95 |               | 1652 | Adafruit Qualia 9.7" DisplayPort Monitor - 2048x1536 Resolution |
 | ![1716](http://www.adafruit.com/images/230x173/1716-00.jpg) |  $79.95 | ![o](one.png) | 1716 | Qualia Bare Driver Board for LP097QX1 Display |
@@ -139,15 +139,15 @@ Retina
 VFD
 ---
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![773](http://www.adafruit.com/images/230x173/773-00.jpg) | $94.95 | 773 | 128x64 Graphic VFD (Vacuum Fluorescent Display) - SPI interface |
 
 Acccessories
 ------------
 
-|   | Price |   | PID | Description |
-| - | -----:| - | ---:| ----------- |
+|     | Price |     | PID | Description |
+| --- | -----:| --- | ---:| ----------- |
 | ![252](http://www.adafruit.com/images/230x173/252-00.jpg)   | $12.50 | ![o](one.png) |  252 | Analog panel meter |
 | ![1676](http://www.adafruit.com/images/230x173/1676-00.jpg) | $14.95 | ![o](one.png) | 1676 | Resistive Touchscreen Overlay - 7" diag. 165mm x 105mm - 4 Wire |
 | ![1679](http://www.adafruit.com/images/230x173/1679-00.jpg) |  $4.95 | ![t](top.png) | 1679 | Adjustable Bent-Wire Stand - up to 7" Tablets and Small Screens |
