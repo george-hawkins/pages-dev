@@ -9,8 +9,7 @@ In each subcategory I've attempted to group the products in a logical manner.
 
 Each product has a product ID (PID), e.g. 181, just click on the PID link for a given product for the Adafruit product page.
 
-Contents
---------
+### Contents
 * [Character](#character)
 * [Graphic LCD](#graphic-lcd)
 * [OLED](#oled)
