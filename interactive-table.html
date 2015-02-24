@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Main Panel</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+      body {
+         padding-top: 70px;
+      }
+      .table tbody>tr>td.vert-align { /* See http://stackoverflow.com/a/13771448/245602 */
+          vertical-align: middle;
+      }
+      .gi-lg {
+         font-size: 18px;
+      }
+      .gi-red {
+         color: red;
+      }
+      .disabled-cell {
+         color: #7a7971;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Animals</div>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="vert-align">Tigger</td>
+                  <td><a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-down"></span></a></td>
+                  <td class="vert-align"><span class="glyphicon gi-lg glyphicon-asterisk"></span></td>
+                  <td><a href="#" class="btn close"><span>&times;</span></a></td>
+                </tr>
+                <tr class="warning">
+                  <td class="vert-align disabled-cell">Antelope</td>
+                  <td><button type="button" class="btn btn-default" disabled><span class="glyphicon glyphicon-circle-arrow-down"></span></button></td>
+                  <td class="vert-align disabled-cell"><span class="glyphicon gi-lg glyphicon-asterisk"></span></td>
+                  <td><a href="#" class="btn close"><span>&times;</span></a></td>
+                </tr>
+                <tr>
+                  <td class="vert-align">Orangutan</td>
+                  <td><a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-down"></span></a></td>
+                  <td class="vert-align"><span class="glyphicon gi-lg glyphicon-asterisk"></span></td>
+                  <td><a href="#" class="btn close"><span>&times;</span></a></td>
+                </tr>
+                <tr>
+                  <td class="vert-align">Puma</td>
+                  <td><a href="#" class="btn btn-primary"><span class="glyphicon glyphicon-circle-arrow-down"></span></a></td>
+                  <td class="vert-align"><span class="glyphicon gi-lg gi-red glyphicon-asterisk"></span></td>
+                  <td><a href="#" class="btn close"><span>&times;</span></a></td>
+                </tr>
+                <tr class="danger">
+                  <td class="vert-align disabled-cell">Boa Constrictor</td>
+                  <td><button type="button" class="btn btn-default" disabled><span class="glyphicon glyphicon-circle-arrow-down"></span></button></td>
+                  <td class="vert-align disabled-cell"><span class="glyphicon gi-lg glyphicon-asterisk"></span></td>
+                  <td><a href="#" class="btn close"><span>&times;</span></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- panel -->
+        </div> <!-- col -->
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">JSON</h3>
+        </div>
+        <div class="panel-body">
+          <pre>
+          {
+            "rows": [
+              { "id": 4732874, "name": "Tiger",           "state": "active", "label-red": false },
+              { "id": 7432787, "name": "Antelope",        "state": "inactive" },
+              { "id": 3774238, "name": "Orangutan",       "state": "active", "label-red": false },
+              { "id": 1218298, "name": "Puma",            "state": "active", "label-red": true },
+              { "id": 5939403, "name": "Boa Constrictor", "state": "dead" },
+            ]
+          }
+          </pre>
+          Above we see 5 row, three of them are active (and one of these has a red label), one of them is inactive (a temporary state) and one of them is dead (a permanent state).
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
